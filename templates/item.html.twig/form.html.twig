@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{{ form_start(form) }}
+
+  <h1>New Ticket</h1>
+<div class="form-row">
+    <div class="form-group col">
+        <label for="ticket_subject">Subject</label>
+        {{ form_widget(form.subject) }}
+        <div class="form-error text-danger">{{ form_errors(form.subject) }}</div>
+    </div>
+    {# <div class="form-group col">
+        <label for="ticket_deparment">Deparment</label>
+        {{ form_widget(form.deparment) }}
+        <div class="form-error text-danger">{{ form_errors(form.deparment) }}</div>
+    </div> #}
+</div>
+
+{% for reply in form.replies %}
+  {{ form_row(reply.message) }}
+{% endfor %}
+
+{# <div class="form-row">
+    <div class="form-group col">
+      <label for="ticket_message">Message</label>
+      <div class="editor-buttons btn-toolbar mb-3" data-parent="editor-0">
+        <div class="btn-group btn-group-sm mr-2" role="group">
+          <a class="btn btn-secondary bb" data-bbcode="b"><i class="fas fa-bold"></i></a>
+          <a class="btn btn-secondary bb" data-bbcode="i"><i class="fas fa-italic"></i></a>
+          <a class="btn btn-secondary bb" data-bbcode="h1"><i class="fas fa-heading"></i></a>
+        </div>
+        <div class="btn-group btn-group-sm mr-2" role="group">
+          <a class="btn btn-secondary bb" data-bbcode="url"><i class="fas fa-link"></i></a>
+        </div>
+        <div class="btn-group btn-group-sm mr-2" role="group">
+          <a class="btn btn-secondary bb" data-bbcode="li"><i class="fas fa-list-ul"></i></a>
+          <a class="btn btn-secondary bb" data-bbcode="ol"><i class="fas fa-list"></i></a>
+          <a class="btn btn-secondary bb" data-bbcode="code"><i class="fas fa-code"></i></a>
+          <a class="btn btn-secondary bb" data-bbcode="quote"><i class="fas fa-quote-right"></i></a>
+        </div>
+        <div class="btn-group btn-group-sm mr-2" role="group">
+          <a data-toggle="Toggle" value="[b][/b]" class="btn btn-secondary bb"><i class="fas fa-question-circle"></i></a>
+        </div>
+      </div>
+        {{ form_widget(form.message, {'attr': {'class': 'message'}}) }}
+        <div class="form-error text-danger">{{ form_errors(form.message) }}</div>
+    </div>
+</div>
+<div class="form-row">
+    <div class="form-group col-3">
+        <label for="ticket_attachment">attachment</label>
+        {{ form_widget(form.attachment) }}
+        <div class="form-error text-danger">{{ form_errors(form.attachment) }}</div>
+    </div>
+</div> #}
+<div class="button-group text-center">
+  <button class="btn btn-primary" type="submit" name="submit">Submit</button>
+  <button class="btn btn-secondary" id="preview" type="button" data-toggle="modal" data-target="#exampleModalCenter" name="submit">Preview</button>
+  <button class="btn btn-secondary" type="reset" name="submit">cancel</button>
+</div>
+{{ form_end(form) }}
+
+
+{% block javascript %}
+
+<script type="text/javascript">
+$(document).on("mousedown", "[data-bbcode]", function() {
+  var editor = $("." + $(this).parent(".btn-group").parent(".editor-buttons").attr("data-parent"));
+  var str = $(editor).val();
+  var selection = getInputSelection($(editor));
+  if (selection.length > 0) {
+      $(editor).val(str.replace(selection, "[" + $(this).attr("data-bbcode") + "]" + selection + "[/" + $(this).attr("data-bbcode") + "]"));
+  } else {
+      $(editor).val(str + "[" + $(this).attr("data-bbcode") + "]" + "[/" + $(this).attr("data-bbcode") + "]");
+  }
+});
+$(document).ready(function() {
+  var editors = $("[data-editor]");
+  $(editors).each(function(i, el) {
+
+      $(el).addClass("editor-" + i);
+  });
+});
+
+function getInputSelection(elem) {
+  if (typeof elem != "undefined") {
+      s = elem[0].selectionStart;
+      e = elem[0].selectionEnd;
+      return elem.val().substring(s, e);
+  } else {
+      return '';
+  }
+}
+</script>
+
+{% endblock %}
+
+{% endblock %}

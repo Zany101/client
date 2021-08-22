@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+  <title>Pushfully - {% block title %}Welcome!{% endblock %}</title>
+    <link rel="icon" type="image/ico" href="assets/img/partners/venatus melee.jpg"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{% block description %}Pushfully Gaming Solution{% endblock %}">
+    <meta name="keywords" content="Hosting">
+    <meta name="keywords" content="Servers">
+    <meta name="keywords" content="Control Panel">
+    {# <meta property="og:image" content="/images/bitmap.png"> #}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('build/app.css') }}">
+    {% block stylesheets %}{% endblock %}
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script src="{{ asset('scripts/ajax.js') }}"></script>
+    <script src="{{ asset('scripts/script.js') }}"></script>
+
+    <link rel="stylesheet" href="{{ asset('sidebar.css') }}">
+    <script src="https://kit.fontawesome.com/d71a591775.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.ui.position.js"></script>
+
+    <!-- jsPanel CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/jspanel4@4.11.1/dist/jspanel.css" rel="stylesheet">
+    <!-- jsPanel JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/jspanel4@4.11.1/dist/jspanel.js"></script>
+
+    <!-- optional jsPanel extensions -->
+    <script src="https://cdn.jsdelivr.net/npm/jspanel4@4.11.1/dist/extensions/modal/jspanel.modal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspanel4@4.11.1/dist/extensions/tooltip/jspanel.tooltip.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspanel4@4.11.1/dist/extensions/hint/jspanel.hint.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspanel4@4.11.1/dist/extensions/layout/jspanel.layout.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspanel4@4.11.1/dist/extensions/contextmenu/jspanel.contextmenu.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspanel4@4.11.1/dist/extensions/dock/jspanel.dock.js"></script>
+
+    {# codemirror #}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/codemirror.min.js" integrity="sha512-i9pd5Q6ntCp6LwSgAZDzsrsOlE8SN+H5E0T5oumSXWQz5l1Oc4Kb5ZrXASfyjjqtc6Mg6xWbu+ePbbmiEPJlDg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/codemirror.min.css" integrity="sha512-xIf9AdJauwKIVtrVRZ0i4nHP61Ogx9fSRAkCLecmE2dL/U8ioWpDvFCAy4dcfecN72HHB9+7FfQj3aiO68aaaw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+          $('[data-toggle="tooltip"]').tooltip({
+            placemen:'right',
+          });
+        })
+    </script>
+
+</head>
+
+    <body>
+    {{ render(controller('App\\Controller\\CompanyController::show')) }}
+        <main style="min-height: calc(100vh - 159px);">
+
+        {%
+            include 'shared/page_heading.html.twig' with {
+                 'page_title' : block('title'),
+                 'page_description' : block('description'),
+            } only
+        %}
+        
+        {% block nav %}{% endblock %}
+
+
+
+        <section class="content">
+        <div class="container">
+            <div class="py-3 mb-4" style="background: #1f1f1f;">
+              <div class="bread-crumb">{{ breadcrumbs(" &raquo; ", "Home", null, 'filemanager') }}</div>
+            </div>
+        </div>
+					<div class="container">{% block body %}{% endblock %}</div>
+				</section>
+
+        <section class="content ">
+        <div class="container">{% block in_between %}{% endblock %}</div>
+				</section>
+
+        {# <div class="spacer"></div> #}
+        </main>
+        {% include 'shared/footer.html.twig' %}
+
+        {# <div id="probootstrap-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#333"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#f08200"/></svg></div> #}
+        <script type="text/javascript">
+        	$(window).on('load',function(){
+        		setTimeout(function(){
+        		 $('#probootstrap-loader').hide();
+        		 $('body').css('overflow-y', 'scroll');
+        	 },2500 );
+        	});
+
+
+          $('.toggle').click(function () {
+        		// show
+        		var target = "#"+$(this).data("target");
+        		$(this).addClass("selected");
+        		$(this).attr("data-toggle", "show");
+        		$(target).removeClass("hide");
+
+
+        		// Hide the rest
+        		$(this).siblings().removeClass("selected");
+        		$(this).siblings().attr("data-toggle", "hidden");
+        		var target = "#"+$(this).siblings().data("target");
+        		$(target).addClass("hide");
+        	});
+        </script>
+    </body>
+    {# contextmenu #}
+
+    {% block javascripts %}
+<script type="text/javascript">
+const raw_url = location.protocol + '//' + location.host + location.pathname;
+const url = raw_url.substring(0, raw_url.length - +(raw_url.lastIndexOf('/') == raw_url.length - 1));
+
+
+$(document).on("dblclick", '[data-navigate]', (function (e) {
+
+    var navigate = $(this).data('navigate');
+    var val = $(this).text();
+
+    // Last value
+    param = url.substr(url.lastIndexOf("/") + 1);
+
+    // Removes "/" if its the last key
+    document.location = url+"/"+navigate;
+    return
+}));
+$(document)
+    .ready(function () {
+
+        $(document)
+            .on('click', '.clickable-row', function () {
+                window.location = $(this)
+                    .data("href");
+            });
+
+        function delay(callback, ms) {
+            var timer = 0;
+            return function () {
+                var context = this,
+                    args = arguments;
+                clearTimeout(timer);
+                timer = setTimeout(function () {
+                    callback.apply(context, args);
+                }, ms || 0);
+            };
+        }
+
+        $(document)
+            .on('click', '[data-link]', function () {
+                window.location = $(this)
+                    .data("href");
+            });
+
+        $(document)
+            .on("dblclick", '[data-action="open"]', (function (e) {
+
+
+                var type = $(this)
+                    .data('type');
+
+                    console.log(type);
+                var test = {}
+
+                var action = $(this)
+                    .data('action');
+                var item = $(this)
+                    .data('target');
+
+                if (type == "file") {
+                    ext = item.substring(item.lastIndexOf(".") + 1);
+                    $.ajax({
+                        url : url + "/edit/" + item,
+                        success: function (html) {
+                            jsPanel.create({
+                                headerTitle: item,
+                                content: '<textarea id="editor">' + html.output + '</textarea>',
+                                callback: function (panel) {
+                                    $("i.fas.fa-save", panel)
+                                        .on("click", function () {
+                                            $.ajax({
+                                                    type: 'POST',
+                                                    url: url + '/' + item,
+                                                    data: { 'test': editor.getValue() },
+                                                })
+                                                .done(function (data) {
+                                                    console.log(data);
+                                                });
+                                        });
+
+                                },
+                            })
+                        }
+                    });
+                    return;
+                }
+
+                // Last value
+                var param = url.substr(url.lastIndexOf("/") + 1);
+
+                // Redirect
+                document.location = url + "/" + item;
+                return
+            }));
+
+            $(document)
+                .on("click", '[data-selectable=true]', (function (e) {
+                    $(this).toggleClass("selected");
+                }));
+
+    });
+
+</script>
+    {% endblock %}
+</html>

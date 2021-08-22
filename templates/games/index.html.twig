@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+{% embed 'shared/table.twig' %}
+  {% block cardHeader %}Games{% endblock %}
+  {% block tableHead %}
+    <th title="Sort" class="text-center" scope="col">{{ knp_pagination_sortable(results, 'id', 'g.id') }}</th>
+    <th title="Sort" scope="col">{{ knp_pagination_sortable(results, 'Display Name', 'g.displayName') }}</th>
+    <th title="Sort" class="text-center" scope="col">{{ knp_pagination_sortable(results, 'Short Name', 'g.shortName') }}</th>
+    <th title="Sort" class="text-center" scope="col">{{ knp_pagination_sortable(results, 'Operating System', 'g.operatingSystem') }}</th>
+    <th title="Sort" class="text-center" scope="col">{{ knp_pagination_sortable(results, 'Voice Server', 'g.isVoiceServer') }}</th>
+    <th title="Sort" class="text-center" scope="col">{{ knp_pagination_sortable(results, 'Template', 'g.isTemplate') }}</th>
+  {% endblock tableHead %}
+  {% block tableBody %}
+    {% for game in results %}
+    <tr class="clickable-row" data-href="/system/games/{{game.Id}}">
+      <td class="text-center">{{game.Id}}</td>
+      <td class="w-25">{{game.displayName}}</td>
+      <td class="text-center">{{game.shortName}}</td>
+      <td class="text-center">{{game.operatingSystem|operating_system}}</td>
+      <td class="text-center">{{game.isVoiceServer|boolean}}</td>
+      <td class="text-center">{{game.isTemplate}}</td>
+    <td class="text-center"></td>
+    </tr>
+    {% endfor %}
+  {% endblock tableBody %}
+{% endembed %}
+
+{% endblock %}

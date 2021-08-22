@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Servers{% endblock %}
+
+{% block body %}
+{% embed "shared/page_heading.html.twig" %}
+    {% block title %}{% endblock %}
+    {% block description %}{% endblock %}
+{% endembed %}
+
+{% embed 'navs/secondary_nav.html.twig' %}
+  {% block left %}
+
+  {% endblock %}
+{% endembed %}
+<section class="content">
+  <div class="container">
+      <div class="row">
+          <div class="col-3">
+            {% block sideNav %}{% endblock %}
+          </div>
+          <div class="col-9">
+            {% block content %}{% endblock %}
+          </div>
+      </div>
+  </div>
+</section>
+
+{% endblock %}

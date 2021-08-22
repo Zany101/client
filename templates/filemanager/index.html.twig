@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<ul class="nav py-2">
+    <li class="nav-item btn-group-sm ml-0" role="group" aria-label="Filters">
+        <a href="javascript:window.location.reload(true)" data-flt="canceled" class="btn btn-outline-primary filter"><i class="fas fa-check" aria-hidden="true"></i> Refresh</a>
+        <a class="btn btn-outline-primary" href="{{ app.request.pathinfo  }}/create?type=0">New File</a>
+        <a class="btn btn-outline-primary" href="{{ app.request.pathinfo  }}/create?type=1">New Folder</a>
+        <a class="btn btn-outline-primary" data-action="upload" href="#">Upload</a>
+    </li>
+</ul>
+{% embed 'shared/card.html.twig' %}
+{% block cardHeader %}File Manager{% endblock %}
+{% block cardContent %}
+<div class="row">
+    <div class="col-2 pr-0">
+        <ul class="list-unstyled ">
+            {% for key,file in tree %}
+            <li>
+                <a class="nav-link dropdown-toggle m-0 p-0" data-navigate="tree" href="#{{file.filename}}" data-toggle="collapse" data-href="{{file.filename}}" aria-expanded="false">{{file.filename}}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="col-10 pl-0">
+        {% embed 'shared/table.twig'%}
+        {% block tableHead %}
+        <tr>
+            <th colspan="5" class="bread-crumb">{{ breadcrumbs(" &raquo; ", "Filemanager", 'filemanager', null) }}</th>
+        </tr>
+        <tr>
+            <th title="Sort" scope="col">{{ knp_pagination_sortable(results, 'Name', 'filename') }}</th>
+            <th title="Sort" class="text-center" scope="col">{{ knp_pagination_sortable(results, 'Owner', 'uid') }}</th>
+            <th title="Sort" class="text-center" scope="col">{{ knp_pagination_sortable(results, 'Type', 'type') }}</th>
+            <th title="Sort" class="text-center" scope="col">{{ knp_pagination_sortable(results, 'Size', 'size') }}</th>
+            <th title="Sort" class="text-center" scope="col">{{ knp_pagination_sortable(results, 'Last edited', 'atime') }}</th>
+        </tr>
+        {% endblock tableHead %}
+        {% block tableBody %}
+        {% if app.request.get('path') %}
+        <tr data-selectable='false' class="w-50" data-action="open" data-type="dir" data-target="..">
+            <td colspan="6">..</td>
+        </tr>
+        {% endif %}
+        {% for file in results %}
+        <tr data-selectable='true' class="w-50" data-action="open" data-type="{{file.type == 2 ? "dir" : "file"}}" data-target="{{file.filename}}">
+            <td >{{file.filename}}</td>
+            <td class="text-center">{{file.uid}}</td>
+            <td class="text-center">{{file.type == 2 ? "dir" : "file"}}</td>
+            <td class="text-center">{{ size(file.size)}}</td>
+            <td class="text-center">{{ date(file.mtime) }}</td>
+        </tr>
+        {% endfor %}
+        {% endblock %}
+        {% endembed %}
+    </div>
+</div>
+{% endblock %}
+{% endembed %}
+{% endblock %}
+{% block javascripts %}
+{# context menu  #}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.ui.position.js"></script>
+
+<!-- jsPanel CSS -->
+<link href="https://cdn.jsdelivr.net/npm/jspanel4@4.11.1/dist/jspanel.css" rel="stylesheet">
+<!-- jsPanel JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/jspanel4@4.11.1/dist/jspanel.js"></script>
+
+<!-- optional jsPanel extensions -->
+<script src="https://cdn.jsdelivr.net/npm/jspanel4@4.11.1/dist/extensions/modal/jspanel.modal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspanel4@4.11.1/dist/extensions/tooltip/jspanel.tooltip.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspanel4@4.11.1/dist/extensions/hint/jspanel.hint.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspanel4@4.11.1/dist/extensions/layout/jspanel.layout.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspanel4@4.11.1/dist/extensions/contextmenu/jspanel.contextmenu.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspanel4@4.11.1/dist/extensions/dock/jspanel.dock.js"></script>
+
+{# codemirror #}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/codemirror.min.js" integrity="sha512-i9pd5Q6ntCp6LwSgAZDzsrsOlE8SN+H5E0T5oumSXWQz5l1Oc4Kb5ZrXASfyjjqtc6Mg6xWbu+ePbbmiEPJlDg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/codemirror.min.css" integrity="sha512-xIf9AdJauwKIVtrVRZ0i4nHP61Ogx9fSRAkCLecmE2dL/U8ioWpDvFCAy4dcfecN72HHB9+7FfQj3aiO68aaaw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<script src="{{ asset('scripts/script.js')}}"></script>
+<script src="{{ asset('scripts/filemanager.js')}}"></script>
+{% endblock %}

@@ -1,0 +1,58 @@
+
+{% block navTab %}
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="{{ template(_self) }}-tab" data-toggle="tab" data-target="#{{ template(_self) }}" type="button" role="tab" aria-controls="{{ template(_self) }}" aria-selected="false">{{ template(_self)|capitalize }}</button>
+  </li>
+{% endblock %}
+{% block tab %}
+<div class="tab-pane fade" id="{{ template(_self)  }}" role="tabpanel" aria-labelledby="{{ template(_self)  }}-tab">
+  <div class="form-row">
+      <div class="form-group col">
+          {{ form_widget(form.gamePermissions.serviceId) }}
+          <div class="form-error">{{ form_errors(form.gamePermissions.serviceId) }}</div>
+      </div>
+  </div>
+  <div class="form-row">
+      <div class="form-group col">
+          {{ form_widget(form.gamePermissions.userId) }}
+          <div class="form-error">{{ form_errors(form.gamePermissions.userId) }}</div>
+      </div>
+  </div>
+  <div class="form-row">
+      <div class="form-group col">
+          {{ form_widget(form.gamePermissions.permissionKey) }}
+          <div class="form-error">{{ form_errors(form.gamePermissions.permissionKey) }}</div>
+      </div>
+  </div>
+  <div class="form-row">
+      <div class="form-group col">
+          {{ form_widget(form.gamePermissions.subadminAccess) }}
+          <div class="form-error">{{ form_errors(form.gamePermissions.subadminAccess) }}</div>
+      </div>
+  </div>
+  <div class="form-row">
+      <div class="form-group col">
+          {{ form_widget(form.gamePermissions.resellerAccess) }}
+          <div class="form-error">{{ form_errors(form.gamePermissions.resellerAccess) }}</div>
+      </div>
+  </div>
+  <div class="form-row">
+      <div class="form-group col">
+          {{ form_widget(form.gamePermissions.userAccess) }}
+          <div class="form-error">{{ form_errors(form.gamePermissions.userAccess) }}</div>
+      </div>
+  </div>
+  <div class="form-row">
+      <div class="form-group col">
+          {{ form_widget(form.gamePermissions.subuserAccess) }}
+          <div class="form-error">{{ form_errors(form.gamePermissions.subuserAccess) }}</div>
+      </div>
+  </div>
+  <div class="form-row">
+      <div class="form-group col">
+          {{ form_widget(form.gamePermissions.resellerOverride) }}
+          <div class="form-error">{{ form_errors(form.gamePermissions.resellerOverride) }}</div>
+      </div>
+  </div>
+</div>
+{% endblock %}

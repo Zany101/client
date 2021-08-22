@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Server{% endblock %}
+
+{% block body %}
+<ul class="nav py-2">
+    <li class="nav-item btn-group-sm ml-0" role="group" aria-label="Filters">
+      <a class="btn btn-outline-primary" href="{{ app.request.uri }}/create">New</a>
+      <button class="btn btn-outline-primary" type="reset"><i class="fas fa-history" aria-hidden="true"></i> Cancel</button>
+    </li>
+</ul>
+{% embed 'shared/card.html.twig'%}
+
+{% block cardHeader %}Game Servers{% endblock %}
+  {% block cardContent %}
+  {% embed 'shared/table.twig' %}
+
+  {% block tableHead %}
+    <th title="Sort" scope="col">Description</th>
+    <th title="Sort"scope="col">Command Line</th>
+    <th title="Sort"scope="col">Action</th>
+  {% endblock tableHead %}
+  {% block tableBody %}
+    <tr>
+      <td class="w-25">Default</td>
+      {# <td>{{ command_parse(services.gameServices.game.gameCmdlines.cmdlineDefault,services)}}</td> #}
+    </tr>
+    {% for customCmdLines in results %}
+    <tr class="clickable-row" data-href="{{ app.request.uri }}/{{customCmdLines.cmdlineId}}">
+      <td class="w-25">{{customCmdLines.description}}</td>
+      <td>{{customCmdLines.cmdline}}</td>
+      <td>
+        <button class="btn btn-sm btn-outline-primary" type="button" name="button">Select</button>
+      </td>
+    </tr>
+    {% endfor %}
+  {% endblock tableBody %}
+  {% endembed %}
+  {% endblock cardContent %}
+{% endembed %}
+
+{% endblock %}

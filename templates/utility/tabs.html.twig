@@ -1,0 +1,15 @@
+
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+<div class="card {% block cardCss %}{% endblock %}">
+    <div class="card-header">
+      <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">{% block navTab %}{% endblock %}</ul>
+    </div>
+    <div class="card-body">
+      <div class="tab-content">{% block tab %}{% endblock %}</div>
+    </div>
+</div>
+{% endblock %}

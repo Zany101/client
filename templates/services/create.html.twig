@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+{% block title %} Servers{% endblock %}
+
+{% block body %}
+
+{% embed "shared/page_heading.html.twig" %}
+{% block title %}Control Panel{% endblock %}
+{% block description %}Servers{% endblock %}
+{% endembed %}
+<section class="content">
+  <div class="container">
+      <div class="row">
+          <div class="col-12">
+
+          {{ form_start(form) }}
+
+            {% embed 'shared/card.html.twig' %}
+            {% block cardHeader %}
+            <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="service-tab" data-toggle="tab" data-target="#service" type="button" role="tab" aria-controls="service" aria-selected="true">Service</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="game-service-tab" data-toggle="tab" data-target="#game-service" type="button" role="tab" aria-controls="game-service" aria-selected="false">Game Service</button>
+              </li>
+            </ul>
+            {% endblock %}
+              {% block cardContent %}
+              <ul class="nav py-2">
+                  <li class="nav-item btn-group-sm ml-0" role="group" aria-label="Filters">
+                    <button class="btn btn-outline-primary" type="submit"><i class="fas fa-check" aria-hidden="true"></i> Save</button>
+                    <button class="btn btn-outline-primary" type="reset"><i class="fas fa-history" aria-hidden="true"></i> Cancel</button>
+                  </li>
+              </ul>
+                <div class="tab-content">
+                {# services #}
+                  <div class="tab-pane fade show active" id="service" role="tabpanel" aria-labelledby="service-tab">
+                  {{ form_errors(form) }}
+                    <div class="form-row">
+                        <div class="form-group col">
+                            {{ form_widget(form.server) }}
+                            <div class="form-error text-danger">{{ form_errors(form.server) }}</div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col">
+                            {{ form_widget(form.user) }}
+                            <div class="form-error">{{ form_errors(form.user) }}</div>
+                        </div>
+                    </div>
+
+                  </div>
+                  {# game services #}
+                  <div class="tab-pane fade" id="game-service" role="tabpanel" aria-labelledby="game-service-tab">
+                  {{ form_errors(form) }}
+                    <div class="form-row">
+                        <div class="form-group col">
+                            {{ form_widget(form.slots) }}
+                            <div class="form-error text-danger">{{ form_errors(form.slots) }}</div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              {{ form_end(form) }}
+
+              {% endblock cardContent %}
+            {% endembed %}
+          </div>
+      </div>
+  </div>
+</section>
+{% endblock %}

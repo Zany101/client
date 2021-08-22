@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Client Area{% endblock %}
+{% block description %}Support Tickets{% endblock %}
+{% block nav %}
+    {%
+        include 'navs/secondary_nav.html.twig' with {
+            nav : {
+             'Tickets' : 'Tickets',
+             'Archive' : 'Archive',
+            }
+        } only
+    %}
+{% endblock %}
+{% block body %}
+
+<div class="row">
+
+
+  <div class="col-3">
+      <div class="list-group">
+        <a href="/support/create" class="list-group-item"><i class="far fa-plus-square"></i> Create</a>
+        <a href="/support/create" class="list-group-item"><i class="fas fa-external-link-square-alt"></i> Open</a>
+        <a href="/support/create" class="list-group-item"><i class="fas fa-check"></i> Answered</a>
+        <a href="/support/create" class="list-group-item"><i class="fas fa-reply"></i> Reply</a>
+        <a href="/support/create" class="list-group-item"><i class="fas fa-window-close"></i> Closed</a>
+      </div>
+  </div>
+
+  <div class="col-9">
+  {% embed 'shared/card.html.twig'%}
+{% block cardHeader %}Tickets{% endblock %}
+    {% block cardContent %}
+
+    {%
+        include 'shared/table.twig' with {
+            row : {
+              'id' : {
+                  'property' : 'ticketId',
+                  'object' : null
+              },
+              'subject' : {
+                  'property' : 'subject',
+                  'object' : null
+              },
+              'category' : {
+                  'property' : 'supportCatId',
+                  'object' : null
+              },
+              'status' : {
+                  'property' : 'status',
+                  'object' : null
+              },
+              'created' : {
+                  'property' : 'createdOn',
+                  'object' : null
+              },
+              'last reply' : {
+                  'property' : 'lastResponse',
+                  'object' : null
+              },
+            },
+            results : results
+        } only
+    %}
+
+    {% endblock cardContent %}
+  {% endembed %}
+  </div>
+
+</div>
+
+{% endblock %}

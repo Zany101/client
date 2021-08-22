@@ -1,0 +1,27 @@
+{% if not app.user %}
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+      <span>Account</span>
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <a class="dropdown-item" href="/login">Login</a>
+        <a class="dropdown-item" href="/register">Create Account</a>
+    </div>
+</li>
+{% else %}
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+      <i class="fas fa-user"></i>
+      <span>{{ app.user.username }}</span>
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <a class="dropdown-item" href="/account">My Account</a>
+        <a class="dropdown-item" href="/tickets">Tickets</a>
+        <a class="dropdown-item" href="/orders">Orders</a>
+        <a class="dropdown-item" href="/invoices">Invoices</a>
+        <a class="dropdown-item" href="/services">Services</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/logout">logout</a>
+    </div>
+  </li>
+{% endif %}

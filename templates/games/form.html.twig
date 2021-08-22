@@ -1,0 +1,58 @@
+
+{% extends 'utility/tabs.html.twig' %}
+
+  {% use "games/form/bukkit.html.twig" with navTab as bikkitNav, tab as bikkitTabs %}
+  {% use "games/form/cmdline.html.twig" with navTab as cmdlineNav, tab as cmdlineTabs %}
+  {% use "games/form/config_files.html.twig" with navTab as configFilesNav, tab as configFilesTabs %}
+  {% use "games/form/details.html.twig" with navTab as detailsNav, tab as detailsTabs %}
+  {% use "games/form/keys.html.twig" with navTab as keysNav, tab as keysTabs %}
+  {% use "games/form/links.html.twig" with navTab as linksNav, tab as linksTabs %}
+  {% use "games/form/map_packs.html.twig" with navTab as mapPacksNav, tab as mapPacksTabs %}
+  {% use "games/form/mods.html.twig" with navTab as modsNav, tab as modsTabs %}
+  {% use "games/form/paths.html.twig" with navTab as pathNav, tab as pathTabs %}
+  {% use "games/form/permissions.html.twig" with navTab as permissionsNav, tab as permissionsTabs %}
+  {% use "games/form/ports.html.twig" with navTab as portsNav, tab as portsTabs %}
+  {% use "games/form/punkbuster.html.twig" with navTab as punkbusterNav, tab as punkbusterTabs %}
+  {% use "games/form/steam.html.twig" with navTab as steamNav, tab as steamTabs %}
+
+  {% block actions %}
+  {{ form_start(form) }}
+
+    <ul class="nav py-2">
+      <li class="nav-item btn-group-sm ml-0" role="group" aria-label="Filters">
+        <a href="{{ app.request.uri }}" class="btn btn-outline-primary"><i class="far fa-plus-square" aria-hidden="true"></i> New</a>
+        <a href="{{ app.request.uri }}/edit" data-flt="canceled" class="btn btn-outline-primary"><i class="fas fa-check" aria-hidden="true"></i> Edit</a>
+        <a href="{{ app.request.uri }}" data-flt="canceled" class="btn btn-outline-danger"><i class="fas fa-check" aria-hidden="true"></i> Delete</a>
+      </li>
+    </ul>
+
+  {% endblock %}
+
+  {% block navTab %}
+    {{ block('detailsNav') }}
+    {{ block('portsNav') }}
+    {{ block('cmdlineNav') }}
+    {{ block('configFilesNav') }}
+    {{ block('pathNav') }}
+    {{ block('permissionsNav') }}
+
+
+    {{ block('punkbusterNav') }}
+    {{ block('steamNav') }}
+
+  {% endblock %}
+  {% block tab %}
+    {{ block('detailsTabs') }}
+    {{ block('portsTabs') }}
+    {{ block('cmdlineTabs') }}
+    {{ block('configFilesTabs') }}
+    {{ block('pathTabs') }}
+    {{ block('permissionsTabs') }}
+
+
+    {{ block('punkbusterTabs') }}
+    {{ block('steamTabs') }}
+  {{ form_end(form) }}
+
+
+  {% endblock %}

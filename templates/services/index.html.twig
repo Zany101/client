@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+{% block title %} Servers{% endblock %}
+{% block description %}Game Server{% endblock %}
+
+{% block nav %}
+    {%
+        include 'navs/secondary_nav.html.twig' with {
+            nav : {
+             'Tickets' : 'Tickets',
+             'Archive' : 'Archive',
+            }
+        } only
+    %}
+{% endblock %}
+
+{% block body %}
+
+
+          {% embed 'shared/card.html.twig'%}
+            {% block cardHeader %}Game Servers{% endblock %}
+            {% block cardContent %}
+
+            {%
+                include 'shared/table.twig' with {
+                    row : {
+                      'id' : {
+                          'property' : 'serviceId',
+                          'object' : null
+                      },
+                      'Owner' : {
+                          'property' : 'userName',
+                          'object' : 'user'
+                      },
+                      'Server' : {
+                          'property' : 'displayName',
+                          'object' : 'server'
+                      },
+                      'status' : {
+                          'property' : 'billingStatus',
+                          'object' : null
+                      },
+                    },
+                    results : results
+                } only
+            %}
+
+            {% endblock cardContent %}
+          {% endembed %}
+{% endblock %}

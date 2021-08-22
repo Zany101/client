@@ -1,0 +1,85 @@
+
+{% block navTab %}
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="{{ template(_self) }}-tab" data-toggle="tab" data-target="#{{ template(_self) }}" type="button" role="tab" aria-controls="{{ template(_self) }}" aria-selected="false">{{ template(_self)|capitalize }}</button>
+  </li>
+{% endblock %}
+{% block tab %}
+<div class="tab-pane fade" id="{{ template(_self)  }}" role="tabpanel" aria-labelledby="{{ template(_self)  }}-tab">
+{% for file in form.gameConfigFiles %}
+  <div class="form-row">
+      <div class="form-group col">
+          {{ form_widget(file.fileId) }}
+          <div class="form-error">{{ form_errors(file.fileId) }}</div>
+      </div>
+  </div>
+  <div class="form-row">
+     <div class="form-group col">
+         {{ form_widget(file.relativePath) }}
+         <div class="form-error">{{ form_errors(file.relativePath) }}</div>
+     </div>
+ </div>
+ <div class="form-row">
+     <div class="form-group col">
+         {{ form_widget(file.enableTextEditorReseller) }}
+         <div class="form-error">{{ form_errors(file.enableTextEditorReseller) }}</div>
+     </div>
+ </div>
+ <div class="form-row">
+     <div class="form-group col">
+         {{ form_widget(file.enableTextEditorUser) }}
+         <div class="form-error">{{ form_errors(file.enableTextEditorUser) }}</div>
+     </div>
+ </div>
+ <div class="form-row">
+     <div class="form-group col">
+         {{ form_widget(file.description) }}
+         <div class="form-error">{{ form_errors(file.description) }}</div>
+     </div>
+ </div>
+ <div class="form-row">
+     <div class="form-group col">
+         {{ form_widget(file.viewOrder) }}
+         <div class="form-error">{{ form_errors(file.viewOrder) }}</div>
+     </div>
+ </div>
+ <div class="form-row">
+     <div class="form-group col">
+         {{ form_widget(file.template) }}
+         <div class="form-error">{{ form_errors(file.template) }}</div>
+     </div>
+ </div>
+ <div class="form-row">
+     <div class="form-group col">
+         {{ form_widget(file.readValues) }}
+         <div class="form-error">{{ form_errors(file.readValues) }}</div>
+     </div>
+ </div>
+ <div class="form-row">
+     <div class="form-group col">
+         {{ form_widget(file.enableConfigEditor) }}
+         <div class="form-error">{{ form_errors(file.enableConfigEditor) }}</div>
+     </div>
+ </div>
+ <div class="form-row">
+     <div class="form-group col">
+         {{ form_widget(file.hidePath) }}
+         <div class="form-error">{{ form_errors(file.hidePath) }}</div>
+     </div>
+ </div>
+ <div class="form-row">
+     <div class="form-group col">
+         {{ form_widget(file.hideReadFailure) }}
+         <div class="form-error">{{ form_errors(file.hideReadFailure) }}</div>
+     </div>
+ </div>
+ <div class="form-row">
+     <div class="form-group col">
+         {{ form_widget(file.updateAutomatically) }}
+         <div class="form-error">{{ form_errors(file.updateAutomatically) }}</div>
+     </div>
+ </div>
+ <hr>
+{% endfor %}
+</div>
+{% endblock %}

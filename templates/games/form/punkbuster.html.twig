@@ -1,0 +1,40 @@
+
+{% block navTab %}
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="{{ template(_self) }}-tab" data-toggle="tab" data-target="#{{ template(_self) }}" type="button" role="tab" aria-controls="{{ template(_self) }}" aria-selected="false">{{ template(_self)|capitalize }}</button>
+  </li>
+{% endblock %}
+{% block tab %}
+<div class="tab-pane fade" id="{{ template(_self)  }}" role="tabpanel" aria-labelledby="{{ template(_self)  }}-tab">
+  <div class="form-row">
+      <div class="form-group col">
+          {{ form_widget(form.gamePunkbusterConfig.serviceId) }}
+          <div class="form-error">{{ form_errors(form.gamePunkbusterConfig.serviceId) }}</div>
+      </div>
+  </div>
+  <div class="form-row">
+      <div class="form-group col">
+          {{ form_widget(form.gamePunkbusterConfig.enablePbweb) }}
+          <div class="form-error">{{ form_errors(form.gamePunkbusterConfig.enablePbweb) }}</div>
+      </div>
+  </div>
+  <div class="form-row">
+      <div class="form-group col">
+          {{ form_widget(form.gamePunkbusterConfig.pbRelativePath) }}
+          <div class="form-error">{{ form_errors(form.gamePunkbusterConfig.pbRelativePath) }}</div>
+      </div>
+  </div>
+  <div class="form-row">
+      <div class="form-group col">
+          {{ form_widget(form.gamePunkbusterConfig.pbDownloadUrl) }}
+          <div class="form-error">{{ form_errors(form.gamePunkbusterConfig.pbDownloadUrl) }}</div>
+      </div>
+  </div>
+  <div class="form-row">
+      <div class="form-group col">
+          {{ form_widget(form.gamePunkbusterConfig.executeOnCreate) }}
+          <div class="form-error">{{ form_errors(form.gamePunkbusterConfig.executeOnCreate) }}</div>
+      </div>
+  </div>
+</div>
+{% endblock %}

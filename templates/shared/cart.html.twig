@@ -1,0 +1,41 @@
+
+
+<nav id="shopping-cart" class="sidebar ">
+
+  <div class="sidebar-header">
+        <h5 class="text-center mb-0">
+            <a id="dismiss" class="float-left">
+              <i class="fas fa-arrow-right"></i>
+            </a>
+            <span>Cart</span>
+          </h5>
+    </div>
+    <ul class="list-unstyled components">
+    {% for item in items %}
+    <li class="row position-relative" style="padding: 15px;">
+      <a href="#" data-target="<?php echo $value['id'] ?>" class="close cart col-1 "><span class="vertical-center" aria-hidden="true">&times;</span></a>
+      <div class="col-4">
+        <img src="assets/img/brand/csgo.jpg" alt="">
+      </div>
+      <div class="col-7">
+        <a href="/product/{{item.product}}">{{item.product_name}}</a>
+        <ul>
+          <li>Price Per Slot {{ moneyFormatter(item.currency, item.unit_amount)  }}</li>
+          <li>Slots {{item.quantity}}</li>
+        </ul>
+      </div>
+    </li>
+    {% endfor %}
+
+    </ul>
+    <ul class="list-unstyled CTAs">
+        <li class="pb-1">CART SUBTOTAL <span class="float-right"><?php echo @money_formater($_SESSION['currency'], $cart->retrieve(session_id())['sub_total'])  ?></span></li>
+        <li class="pb-1">PRORATION <span class="float-right">- <?php echo @money_formater($_SESSION['currency'], $cart->retrieve(session_id())['proration'])  ?></span></li>
+        <li class="pb-1">VAT (21% INCLUSIVE) <span class="float-right"><?php echo @money_formater($_SESSION['currency'], $cart->retrieve(session_id())['sub_total'], 1, 21)  ?></span></li>
+        <hr>
+        <li class="pb-1">ORDER TOTAL <span class="float-right"><?php echo @money_formater($_SESSION['currency'],$cart->retrieve(session_id())['total']) ?></span></li>
+        <li>
+            <a href="/checkout" class="btn btn-primary">Checkout</a>
+        </li>
+    </ul>
+</nav>

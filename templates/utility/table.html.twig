@@ -1,0 +1,36 @@
+
+{% block table %}
+  <table class="table table-hover table-dark table-sm">
+
+    <thead>
+      {% for key,item in row %}
+          <th class="text-center" scope="col">{{ knp_pagination_sortable(results, key, item) }}</th>
+      {% endfor %}
+    </thead>
+
+    <tbody>
+      {% if results.items == null %}
+        <tr>
+          <td colspan="{{row|length }}" scope="row">No results found</td>
+        </tr>
+      {% endif %}
+      {% for rows in results %}
+          <tr data-navigate="{{attribute(rows, row.id.property)}}">
+              {% for key,item in row %}
+
+            {% if item.object == null %}
+              {% set object = rows %}
+            {% else %}
+              {% set object =  attribute(rows, item.object) %}
+            {% endif %}
+                  <td class="text-center">{{ attribute(object, item.property) }}</td>
+              {% endfor %}
+          </tr>
+      {% endfor %}
+    </tbody>
+
+  </table>
+  <div class="pagination pagination-sm m-0">
+      {{ knp_pagination_render(results) }}
+  </div>
+{% endblock %}

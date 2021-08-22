@@ -1,0 +1,33 @@
+{% block navTab %}
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="ports-tab" data-toggle="tab" data-target="#ports" type="button" role="tab" aria-controls="ports" aria-selected="false">ports</button>
+  </li>
+{% endblock %}
+{% block tab %}
+<div class="tab-pane fade" id="ports" role="tabpanel" aria-labelledby="ports-tab">
+  <div class="form-row">
+      <div class="form-group col">
+          {{ form_widget(form.gamePorts.gamePort) }}
+          <div class="form-error">{{ form_errors(form.gamePorts.gamePort) }}</div>
+      </div>
+  </div>
+  <div class="form-row">
+      <div class="form-group col">
+          {{ form_widget(form.gamePorts.queryPort) }}
+          <div class="form-error">{{ form_errors(form.gamePorts.queryPort) }}</div>
+      </div>
+  </div>
+  <div class="form-row">
+      <div class="form-group col">
+          {{ form_widget(form.gamePorts.rconPort) }}
+          <div class="form-error">{{ form_errors(form.gamePorts.rconPort) }}</div>
+      </div>
+  </div>
+  <div class="form-row">
+      <div class="form-group col">
+          {{ form_widget(form.gamePorts.portIncrement) }}
+          <div class="form-error">{{ form_errors(form.gamePorts.portIncrement) }}</div>
+      </div>
+  </div>
+</div>
+{% endblock %}

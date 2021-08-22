@@ -1,0 +1,41 @@
+
+{% block navTab %}
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="cmd-tab" data-toggle="tab" data-target="#cmd" type="button" role="tab" aria-controls="cmd" aria-selected="false">Command line</button>
+  </li>
+{% endblock %}
+{% block tab %}
+<div class="tab-pane fade" id="cmd" role="tabpanel" aria-labelledby="cmd-tab">
+
+  <div class="form-row">
+      <div class="form-group col">
+          {{ form_widget(form.gameCmdlines.cmdlineDefault) }}
+          <div class="form-error">{{ form_errors(form.gameCmdlines.cmdlineDefault) }}</div>
+      </div>
+  </div>
+  <div class="form-row">
+      <div class="form-group col">
+          {{ form_widget(form.gameCmdlines.cmdlinePrivate) }}
+          <div class="form-error">{{ form_errors(form.gameCmdlines.cmdlinePrivate) }}</div>
+      </div>
+  </div>
+  <div class="form-row">
+      <div class="form-group col">
+          {{ form_widget(form.gameCmdlines.cmdlineDefaultCustom) }}
+          <div class="form-error">{{ form_errors(form.gameCmdlines.cmdlineDefaultCustom) }}</div>
+      </div>
+  </div>
+  <div class="form-row">
+      <div class="form-group col">
+          {{ form_widget(form.gameCmdlines.cmdlinePrivateCustom) }}
+          <div class="form-error">{{ form_errors(form.gameCmdlines.cmdlinePrivateCustom) }}</div>
+      </div>
+  </div>
+  <div class="form-row">
+      <div class="form-group col">
+          {{ form_widget(form.gameCmdlines.predefCmdlines) }}
+          <div class="form-error">{{ form_errors(form.gameCmdlines.predefCmdlines) }}</div>
+      </div>
+  </div>
+</div>
+{% endblock %}

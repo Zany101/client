@@ -1,0 +1,10 @@
+
+
+{% for key,link in links %}
+<div class="col text-center">
+  <a href="{{ app.request.uri }}/{{link.url}}">
+    <i style="font-size:3rem"  class="fas fa-{{link.icon}}"></i>
+    <p>{{link.desc}}</p>
+  </a>
+</div>
+{% endfor %}

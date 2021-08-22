@@ -1,0 +1,48 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %} Servers{% endblock %}
+
+{% block body %}
+<ul class="nav py-2">
+    <li class="nav-item btn-group-sm ml-0" role="group" aria-label="Filters">
+      <a class="btn btn-outline-primary" href="{{ app.request.pathinfo  }}/create">Create</a>
+      <button class="btn btn-outline-primary" type="reset"><i class="fas fa-history" aria-hidden="true"></i> Cancel</button>
+    </li>
+</ul>
+  {% embed 'shared/table.twig' %}
+    {% block cardHeader %}Games{% endblock %}
+    {% block tableHead %}
+    <th scope="col">{{ knp_pagination_sortable(results, 'Display Name', 'displayName') }}</th>
+    <th title="Sort" class="text-center" scope="col">{{ knp_pagination_sortable(results, 'Location', 'location') }}</th>
+    {% endblock tableHead %}
+    {% block tableBody %}
+      {% for datacenter in results %}
+      <tr data-navigate="{{datacenter.id}}">
+          <td class="w-50">{{datacenter.displayName}}</td>
+          <td class="text-center">{{datacenter.location}}</td>
+      </tr>
+      {% endfor %}
+    {% endblock tableBody %}
+  {% endembed %}
+
+{% endblock %}
+{% block javascripts %}
+{{ encore_entry_script_tags('app') }}
+<script type="text/javascript">
+const raw_url = location.protocol + '//' + location.host + location.pathname;
+const url  = raw_url.substring(0, raw_url.length - +(raw_url.lastIndexOf('/')==raw_url.length-1));
+$(document).on("dblclick", '[data-navigate]', (function (e) {
+
+    var navigate = $(this).data('navigate');
+    var val = $(this).text();
+
+    // Last value
+    param = url.substr(url.lastIndexOf("/") + 1);
+
+    // Removes "/" if its the last key
+    document.location = url+"/"+navigate;
+    return
+}));
+</script>
+{% endblock %}

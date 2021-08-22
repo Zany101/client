@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{game.displayName}}{% endblock %}
+{% block description %}Game Server{% endblock %}
+{% block nav %}{% include 'navs/product_nav.html.twig' %}{% endblock %}
+{% block body %}
+
+{{ form_start(form) }}
+
+
+			<h1>{{game.displayName}} Setup</h1>
+			<div class="row">
+				<div class="form-group col-6 col-lg-3">
+					{{ form_label(form.plan) }}
+					{{ form_widget(form.plan) }}
+					<div class="form-error text-danger">{{ form_errors(form.plan) }}</div>
+				</div>
+				<div class="form-group col-6 col-lg-9">
+					<label for="order_datacenter">Datacenter</label>
+					{{ form_widget(form.datacenter) }}
+					<div class="form-error text-danger">{{ form_errors(form.datacenter) }}</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col">
+					{{ form_label(form.slots) }}
+					{{ form_widget(form.slots, { 'attr' : {'value' : game.defaultSlots, 'min' : game.minSlots, 'max' : game.maxSlots}}) }}
+					<div class="form-error text-danger">{{ form_errors(form.slots) }}</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-6">
+						<label for="order_hostname">Hostname</label>
+            {{ form_widget(form.hostname) }}
+            <div class="form-error text-danger">{{ form_errors(form.hostname) }}</div>
+				</div>
+				<div class="form-group col-6">
+					<label for="order_rconPassword">Rcon Password</label>
+					{{ form_widget(form.rconPassword) }}
+					<div class="form-error text-danger">{{ form_errors(form.rconPassword) }}</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-6">
+					<input type="submit" class="btn btn-primary" value="Order Now">
+				</div>
+				<div class="col-6">
+					<div class="margin-20px-bottom">
+						<div id="price" class="font-size24 text-right font-weight-700 float-right">
+							<p class="m-0">Slots {{game.defaultSlots}}</p>
+							<p class="text-theme-color">{{moneyFormatter("eur", 50, game.defaultSlots)}}</p>
+						</div>
+					</div>
+				</div>
+	</div>
+{{ form_end(form) }}
+
+{% endblock %}

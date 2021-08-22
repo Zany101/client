@@ -1,0 +1,107 @@
+{% block navTab %}
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="game-tab" data-toggle="tab" data-target="#game" type="button" role="tab" aria-controls="game" aria-selected="false">Game</button>
+  </li>
+{% endblock %}
+{% block tab %}
+<div class="tab-pane fade show active" id="game" role="tabpanel" aria-labelledby="game-tab">
+
+<div class="form-row">
+    <div class="form-group col">
+        {{ form_label(form.operatingSystem) }}
+        {{ form_widget(form.operatingSystem) }}
+        <div class="form-error">{{ form_errors(form.operatingSystem) }}</div>
+    </div>
+</div>
+<div class="form-row">
+  <div class="form-group col">
+      {{ form_widget(form.displayName) }}
+      <div class="form-error">{{ form_errors(form.displayName) }}</div>
+  </div>
+</div>
+<div class="form-row">
+  <div class="form-group col">
+      {{ form_widget(form.shortName) }}
+      <div class="form-error">{{ form_errors(form.shortName) }}</div>
+  </div>
+</div>
+<div class="form-row">
+  <div class="form-group col">
+      {{ form_widget(form.privateRuleName) }}
+      <div class="form-error">{{ form_errors(form.privateRuleName) }}</div>
+  </div>
+</div>
+<div class="form-row">
+  <div class="form-group col">
+      {{ form_widget(form.hostnameRule) }}
+      <div class="form-error">{{ form_errors(form.hostnameRule) }}</div>
+  </div>
+</div>
+<div class="form-row">
+  <div class="form-group col">
+      {{ form_widget(form.privateRuleValue) }}
+      <div class="form-error">{{ form_errors(form.privateRuleValue) }}</div>
+  </div>
+</div>
+<div class="form-row">
+  <div class="form-group col">
+      {{ form_widget(form.queryProtocol) }}
+      <div class="form-error">{{ form_errors(form.queryProtocol) }}</div>
+  </div>
+</div>
+<div class="form-row">
+  <div class="form-group col">
+      {{ form_widget(form.rconProtocol) }}
+      <div class="form-error">{{ form_errors(form.rconProtocol) }}</div>
+  </div>
+</div>
+<div class="form-row">
+  <div class="form-group col">
+      {{ form_widget(form.showInCreateList) }}
+      <div class="form-error">{{ form_errors(form.showInCreateList) }}</div>
+  </div>
+</div>
+<div class="form-row">
+  <div class="form-group col">
+      {{ form_widget(form.isVoiceServer) }}
+      <div class="form-error">{{ form_errors(form.isVoiceServer) }}</div>
+  </div>
+</div>
+<div class="form-row">
+  <div class="form-group col">
+      {{ form_widget(form.isTemplate) }}
+      <div class="form-error">{{ form_errors(form.isTemplate) }}</div>
+  </div>
+</div>
+<div class="form-row">
+  <div class="form-group col">
+      {{ form_widget(form.minSlots) }}
+      <div class="form-error">{{ form_errors(form.minSlots) }}</div>
+  </div>
+</div>
+<div class="form-row">
+  <div class="form-group col">
+      {{ form_widget(form.maxSlots) }}
+      <div class="form-error">{{ form_errors(form.maxSlots) }}</div>
+  </div>
+</div>
+<div class="form-row">
+  <div class="form-group col">
+      {{ form_widget(form.defaultSlots) }}
+      <div class="form-error">{{ form_errors(form.defaultSlots) }}</div>
+  </div>
+</div>
+<div class="form-row">
+  <div class="form-group col">
+      {{ form_widget(form.nameFromQuery) }}
+      <div class="form-error">{{ form_errors(form.nameFromQuery) }}</div>
+  </div>
+</div>
+<div class="form-row">
+  <div class="form-group col">
+      {{ form_widget(form.joinUrl) }}
+      <div class="form-error">{{ form_errors(form.joinUrl) }}</div>
+  </div>
+</div>
+</div>
+{% endblock %}

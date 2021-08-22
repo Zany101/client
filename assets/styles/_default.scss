@@ -1,0 +1,168 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+pre {
+  color: green;
+}
+
+.form-control {
+  padding: 8px 15px;
+  color: unset;
+  border: 1px solid #474747;
+  background: #1f1f1f;
+  font-size: 14px;
+  resize: none;
+
+  &:focus {
+    border-color: #585858;
+    color: #fff;
+    background-color: #1f1f1f;
+    outline: unset;
+    box-shadow: unset;
+  }
+}
+
+.modal-content {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  pointer-events: auto;
+  background-color: #191919;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: .3rem;
+  outline: 0;
+}
+
+.form-control {
+  &:disabled, &[readonly] {
+    background-color: #1f1f1f;
+    opacity: 1;
+  }
+}
+
+body {
+  color: #909090;
+  // font-family: Roboto;
+  font-size: 14px;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  background: #1f1f1f;
+  overflow: hidden;
+  overflow-y: scroll;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+hr {
+  border-top: 1px solid #474747;
+}
+
+a {
+  color: #f08200;
+  text-decoration: none;
+
+  &:active, &:focus, &:link, &:visited {
+    color: #f08200;
+    text-decoration: none;
+  }
+
+  &:active, &:hover {
+    color: a35900;
+    text-decoration: none;
+  }
+}
+
+.btn {
+  &.active:focus, &:active:focus, &:focus {
+    outline: 0;
+  }
+}
+
+a {
+  &:active, &:focus {
+    outline: 0;
+  }
+}
+
+button {
+  &:active, &:focus {
+    outline: 0;
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+p {
+  margin: 0 0 20px;
+  word-spacing: 1px;
+}
+
+strong {
+  font-weight: 600;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 20px;
+  padding: 0;
+  color: #eee;
+  text-transform: uppercase;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: 0;
+}
+
+
+.box {
+  border-bottom: 1px solid #3b3b3b;
+  background-position: inherit;
+  background-size: cover;
+  background-position: 50% 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  font-size: 14px;
+  font-weight: 400;
+  font-style: normal;
+  margin: 0;
+  overflow-x: hidden;
+  // background: linear-gradient(0deg, rgb(25 25 25), rgb(8 8 8 / 30%) 0), url(/public/images/background.jpg);
+  background-blend-mode: luminosity;
+  background-color: #f08200;
+}
+
+section {
+  padding: 90px 0;
+  overflow: hidden;
+
+  &:after {
+    content: "";
+    border-bottom: 1px solid;
+  }
+}
+
+
+.cover-background {
+  background-position: inherit;
+  background-size: cover;
+  background-position: 50% 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  font-size: 14px;
+  font-weight: 400;
+  font-style: normal;
+  margin: 0;
+  overflow: scroll;
+  overflow-x: hidden;
+  // background: linear-gradient(0deg, rgb(25 25 25), rgb(8 8 8 / 30%)), url(/public/images/background.jpg);
+}

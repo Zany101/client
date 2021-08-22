@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+{% block title %} Log File{% endblock %}
+
+
+{% block body %}
+{% embed 'shared/card.html.twig' %}
+{% block cardHeader %}Log File{% endblock %}
+{% block cardContent %}
+ <textarea id="editor" name="name" rows="8" cols="80">{{results}}</textarea>
+{% endblock %}
+{% endembed %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/codemirror.min.js" integrity="sha512-i9pd5Q6ntCp6LwSgAZDzsrsOlE8SN+H5E0T5oumSXWQz5l1Oc4Kb5ZrXASfyjjqtc6Mg6xWbu+ePbbmiEPJlDg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/codemirror.min.css" integrity="sha512-xIf9AdJauwKIVtrVRZ0i4nHP61Ogx9fSRAkCLecmE2dL/U8ioWpDvFCAy4dcfecN72HHB9+7FfQj3aiO68aaaw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/theme/liquibyte.min.css" integrity="sha512-Y7pMcSVpVg6myekc9dUdUfQJH3N+pzobSxFW+HBD19xmYfCHOJYv68kyj4uH0Afrs96o3BWW1y/D/cWd8HC5kg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="{{ asset('scripts/codemirror.js')}}"></script>
+<script type="text/javascript">
+editor = CodeMirror.fromTextArea(document.getElementById('editor'), editor);
+editor.setSize('100%', '1024px');
+editor.setOption('readOnly', true);
+</script>
+{% endblock %}

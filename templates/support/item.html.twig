@@ -1,0 +1,177 @@
+{% extends 'base.html.twig' %}
+{% block title %} Servers{% endblock %}
+{% block description %}Game Server{% endblock %}
+
+{% block nav %}
+    {%
+        include 'navs/secondary_nav.html.twig' with {
+            nav : {
+             'Tickets' : 'Tickets',
+             'Archive' : 'Archive',
+            }
+        } only
+    %}
+{% endblock %}
+
+{% block body %}
+
+<h3>
+  <i class="far fa-comment-alt"></i> {{results.subject}}
+  <span class="float-right">{{results.replies|length}}</span>
+</h3>
+<hr>
+<div class="row">
+
+    {% for reply in replies %}
+    {# <div class="col-12">
+
+        <h6>
+        <i class="far fa-user"></i>
+        {{reply.user.firstName ~ " " ~ reply.user.lastName}}
+        <span class="float-right">{{reply.createdOn|format_date}}
+
+          <a href="#">test</a>
+
+        </span>
+        </h6>
+        <p>{{reply.message}}</p>
+        <a href="#">Reply</a>
+        <a href="#">Queto</a>
+
+    </div> #}
+<style media="screen">
+  .post-author-info {
+    width:5%;
+  }
+  .post-content {
+    width: 95%;
+  }
+  .post-body{
+    background: #252525;
+  }
+</style>
+
+    <div class="col-12" id="{{ reply.replyId }}">
+    		<div class="clearfix">
+    			<div class="coll-md-2 post-author-info float-left">
+    				<div class="post-author">
+    					<div class="icon">
+    						<div class="avatar-medium">
+    							<i class="far fa-user" style="font-size: 250%;"></i>
+    						</div>
+    					</div>
+    				</div>
+    			</div>
+    			<div class=" post-body p-2 coll-md-10 post-content float-right mb-4">
+    				<p class="post-info">
+    					<strong>
+    						<a href="#">{{ reply.user.firstName ~ " " ~ reply.user.lastName }}</a>
+    					</strong>
+    					<span>
+    						<small>
+    							<a class="permalink">
+    								<span class="timeago">{{ reply.createdOn|format_date }}</span>
+    							</a>
+    						</small>
+    					</span>
+
+    					{# <span class="dropdown  pull-right">
+    						<a  onclick="dropdown('<?php echo $post['id'] ?>')" class="dropdown-toggle  ">
+    							<i class="fa fa-ellipsis-v"></i>
+    						</a>
+    						<ul class="dropdown">
+    							<form method="POST" class="dropdown-menu" id="<?php echo $post['id'] ?>">
+    								<?php if (isset($_SESSION['username'])): ?>
+    									<?php if ($_SESSION['username'] != $post['author']): ?>
+    										<li><button name="flag">Flag</button></li>
+    									<?php endif ?>
+
+    									<?php if (
+    										isset($_SESSION['role']) && $_SESSION['role'] > 3 ||
+    										isset($_SESSION['username']) && $_SESSION['username'] == $post['author']
+    									): // show this if you are the author or administraitor or higher?>
+    										<li>
+    											<a href="">
+    												<i class="fa fa-fw fa-pencil"></i>
+    												<span>Edit</span>
+    											</a>
+    										</li>
+    										<li>
+    											<?php if ($counter == 0) : ?>
+    												<button name="deleteTopic">
+    													<i class="fa fa-fw fa-trash-o"></i>
+    													<span>Delete</span>
+    												</button>
+    											<?php else : ?>
+    												<button name="deletePost">
+    													<i class="fa fa-fw fa-trash-o"></i>
+    													<span>Delete</span>
+    												</button>
+    											<?php endif ?>
+    										</li>
+    										<li class="devider"></li>
+    										<li>
+    											<a href="">
+    												<i class="far fa-bookmark"></i>
+    												<span>Bookmark</span>
+    											</a>
+    										</li>
+    										<li class="devider"></li>
+    										<li><input type="hidden" name="postId" value="<?php echo $post['id'] ;?>" /></li>
+    									<?php endif ?>
+    								<?php endif  // show this at all?>
+    										<li>
+    											<button name="permalink">
+    												<i class="fas fa-link"></i>
+    												<span>Permalink</span>
+    											</button>
+    										</li>
+    										<li>
+    											<button name="share">
+    												<i class="fas fa-share-alt"></i>
+    												<span>Share</span>
+    											</button>
+    										</li>
+    							</form>
+    						</ul>
+    					</span> #}
+    				</p>
+
+    				<div class="post-message">
+    				    <p>{{reply.message}}</p>
+    				</div>
+           <div class="post-actions clearfix">
+             <a href="#">Reply</a>
+             <a href="#">Quote</a>
+          </div>
+    			</div>
+    		</div>
+    </div>
+
+    {% endfor %}
+
+</div>
+<hr>
+
+{{ form_start(form) }}
+<div class="form-row">
+  <div class="form-group col-11">
+    {{ form_widget(form.message) }}
+    <div class="form-error">{{ form_errors(form.message) }}</div>
+  </div>
+  <div class="form-group col">
+    <button class="btn btn-secondary" type="submit"><i class="fas fa-arrow-alt-circle-right"></i></button>
+  </div>
+</div>
+{{ form_end(form) }}
+<div class="pagination pagination-sm m-0">
+    {{ knp_pagination_render(replies) }}
+</div>
+
+
+<script type="text/javascript">
+
+</script>
+
+
+{% endblock %}

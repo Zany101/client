@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<ul class="nav py-2">
+  <li class="nav-item btn-group-sm ml-0" role="group" aria-label="Filters">
+    <a href="{{ app.request.uri }}/create" class="btn btn-outline-primary"><i class="far fa-plus-square" aria-hidden="true"></i> New</a>
+    <a href="javascript:window.location.reload(true)" data-flt="canceled" class="btn btn-outline-primary filter"><i class="fas fa-check" aria-hidden="true"></i> Refresh</a>
+  </li>
+</ul>
+
+{% embed 'shared/table.twig' %}
+  {% block cardHeader %}Sub Users{% endblock %}
+
+  {% block tableHead %}
+  <tr>
+    <th title="Sort" scope="col">{{ knp_pagination_sortable(results, 'userName', 'u.userName') }}</th>
+    <th title="Sort" class="text-center" scope="col">{{ knp_pagination_sortable(results, 'roleId', 'u.roleId') }}</th>
+    <th title="Sort" class="text-center" scope="col">{{ knp_pagination_sortable(results, 'status', 'u.status') }}</th>
+    <th title="Sort" class="text-center" scope="col">{{ knp_pagination_sortable(results, 'firstName', 'u.firstName') }}</th>
+    <th title="Sort" class="text-center" scope="col">{{ knp_pagination_sortable(results, 'email', 'u.email') }}</th>
+  </tr>
+  {% endblock %}
+  {% block tableBody %}
+  {% for subuser in results %}
+    <tr data-selectable='true' class="w-50" data-action="open" data-target="{{subuser.id}}">
+      <td class="w-50">{{subuser.userName}}</td>
+      <td class="text-center">{{roles[subuser.roleId].displayName}}</td>
+      <td class="text-center">{{subuser.status}}</td>
+      <td class="text-center">{{subuser.firstName}} {{subuser.lastName}}</td>
+      <td class="text-center">{{subuser.email}}</td>
+    </tr>
+  {% endfor %}
+  {% endblock %}
+{% endembed %}
+{% endblock %}

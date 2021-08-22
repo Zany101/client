@@ -1,0 +1,127 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+{{ form_start(form) }}
+    <ul class="nav py-2">
+        <li class="nav-item btn-group-sm ml-0" role="group" aria-label="Filters">
+          <button class="btn btn-outline-primary" type="submit"><i class="fas fa-check" aria-hidden="true"></i> Save</button>
+          <button class="btn btn-outline-primary" type="reset"><i class="fas fa-history" aria-hidden="true"></i> Cancel</button>
+        </li>
+    </ul>
+  {% embed 'shared/card.html.twig' %}
+  {% block cardHeader %}
+  <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="account-tab" data-toggle="tab" data-target="#account" type="button" role="tab" aria-controls="account" aria-selected="true">Account</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="profile-tab" data-toggle="tab" data-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
+    </li>
+  </ul>
+  {% endblock %}
+    {% block cardContent %}
+    {% if app.request.get('id') %}
+    <div class="row mb-2">
+      <div class="col-2">
+        <ul class="list-group">
+          <li class="d-flex justify-content-between align-items-center">User Id <span class="badge badge-primary">{{user.userId ?? 'N \\ A'}}</span></li>
+          <li class="d-flex justify-content-between align-items-center">Last Login<span class="badge badge-primary">{{user.lastLogin ?? 'N \\ A'}}</span></li>
+          <li class="d-flex justify-content-between align-items-center">Last Login Ip<span class="badge badge-primary">{{user.lastLoginIp ?? 'N \\ A'}}</span></li>
+        </ul>
+      </div>
+    </div>
+    <hr>
+    {% endif %}
+      <div class="tab-content">
+        <div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
+          <div class="form-row">
+              <div class="form-group col">
+                  {{ form_label(form.userName) }}
+                  {{ form_widget(form.userName) }}
+                  <div class="form-error">{{ form_errors(form.userName) }}</div>
+              </div>
+          </div>
+          <div class="form-row">
+              <div class="form-group col">
+                  {{ form_label(form.password) }}
+                  {{ form_widget(form.password) }}
+                  <div class="form-error">{{ form_errors(form.password) }}</div>
+              </div>
+              <div class="form-group col">
+                  {{ form_label(form.confirm) }}
+                  {{ form_widget(form.confirm) }}
+                  <div class="form-error">{{ form_errors(form.confirm) }}</div>
+              </div>
+          </div>
+          {# <div class="form-row">
+              <div class="form-group col">
+                  {{ form_label(form.role) }}
+                  {{ form_widget(form.role) }}
+                  <div class="form-error">{{ form_errors(form.role) }}</div>
+              </div>
+          </div> #}
+        </div>
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+          <div class="form-row">
+              <div class="form-group col">
+                  {{ form_label(form.firstName) }}
+                  {{ form_widget(form.firstName) }}
+                  <div class="form-error">{{ form_errors(form.firstName) }}</div>
+              </div>
+              <div class="form-group col">
+                  {{ form_label(form.lastName) }}
+                  {{ form_widget(form.lastName) }}
+                  <div class="form-error">{{ form_errors(form.lastName) }}</div>
+              </div>
+          </div>
+          <div class="form-row">
+              <div class="form-group col">
+                  {{ form_label(form.email) }}
+                  {{ form_widget(form.email) }}
+                  <div class="form-error">{{ form_errors(form.email) }}</div>
+              </div>
+              <div class="form-group col">
+                  {{ form_label(form.homePhone) }}
+                  {{ form_widget(form.homePhone) }}
+                  <div class="form-error">{{ form_errors(form.homePhone) }}</div>
+              </div>
+          </div>
+          <div class="form-row">
+              <div class="form-group col">
+                  {{ form_label(form.country) }}
+                  {{ form_widget(form.country) }}
+                  <div class="form-error">{{ form_errors(form.country) }}</div>
+              </div>
+          </div>
+          <div class="form-row">
+              <div class="form-group col">
+                  {{ form_label(form.city) }}
+                  {{ form_widget(form.city) }}
+                  <div class="form-error">{{ form_errors(form.city) }}</div>
+              </div>
+              <div class="form-group col">
+                  {{ form_label(form.state) }}
+                  {{ form_widget(form.state) }}
+                  <div class="form-error">{{ form_errors(form.state) }}</div>
+              </div>
+          </div>
+          <div class="form-row">
+              <div class="form-group col">
+                  {{ form_label(form.address) }}
+                  {{ form_widget(form.address) }}
+                  <div class="form-error">{{ form_errors(form.address) }}</div>
+              </div>
+              <div class="form-group col">
+                  {{ form_label(form.zip) }}
+                  {{ form_widget(form.zip) }}
+                  <div class="form-error">{{ form_errors(form.zip) }}</div>
+              </div>
+          </div>
+        </div>
+      </div>
+    {{ form_end(form) }}
+
+    {% endblock cardContent %}
+  {% endembed %}
+{% endblock body %}

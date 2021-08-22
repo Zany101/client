@@ -1,0 +1,75 @@
+
+{% extends 'base.html.twig' %}
+{% block title %}Control Panel{% endblock %}
+{% block description %}Servers{% endblock %}
+
+{% block body %}
+
+          {% embed 'shared/card.html.twig'%}
+
+          {% block cardHeader %}{{services.game.displayName}} - {{services.ipAddress}} : {{services.gamePort}}{% endblock %}
+            {% block cardContent %}
+            <ul class="nav py-2">
+      					<li class="nav-item btn-group-sm ml-0" role="group" aria-label="navigation">
+                  <a href="{{ app.request.pathinfo  }}/filemanager" class="btn btn-outline-primary"><i class="fas fa-folder-open"></i> FileManager</a>
+      						<a href="{{ app.request.pathinfo  }}/command" class="btn btn-outline-primary"><i class="fas fa-terminal"></i> Commandline</a>
+      						<a href="{{ app.request.pathinfo  }}/logs" class="btn btn-outline-primary"><i class="fas fa-file"></i> Log File</a>
+      						<a href="{{ app.request.pathinfo  }}/update" class="btn btn-outline-primary"><i class="fab fa-steam"></i> Update</a>
+                  <a href="{{ app.request.pathinfo  }}/activity" class="btn btn-outline-primary"><i class="fas fa-chart-line"></i> Activity</a>
+                  <a href="{{ app.request.pathinfo  }}/tasks" class="btn btn-outline-primary"><i class="fas fa-calendar-alt"></i> Tasks</a>
+                  <a href="{{ app.request.pathinfo  }}/config" class="btn btn-outline-primary"><i class="fas fa-cog"></i> Config</a>
+                  <a href="{{ app.request.pathinfo  }}/reinstall" class="btn btn-outline-primary"><i class="fas fa-redo"></i> Reinstall</a>
+      					</li>
+      			</ul>
+            <div class="row">
+                <ul class="col">
+                  <li class="d-flex justify-content-between align-items-center">
+                    Connection Info
+                    <span class="badge badge-primary">{{services.ipAddress}} : {{services.gamePort}}</span>
+                  </li>
+                  <li class="d-flex justify-content-between align-items-center">
+                    Query Info
+                    <span class="badge badge-primary">{{services.ipAddress}} : {{services.queryPort}}</span>
+                  </li>
+                  <li class="d-flex justify-content-between align-items-center">
+                    Rcon Info
+                    <span class="badge badge-primary">{{services.ipAddress}} : {{services.rconPort}}</span>
+                  </li>
+                  <li class="d-flex justify-content-between align-items-center">
+                    Status
+                    <span id="pid" class="badge badge-primary">{{services.pid|proccess}}</span>
+                  </li>
+                </ul>
+                <ul class="col">
+
+                  <li class="d-flex justify-content-between align-items-center">
+                    CPU
+                    <span id="cpu" class="badge badge-primary">0%</span>
+                  </li>
+                  <li class="d-flex justify-content-between align-items-center">
+                    Memory
+                    <span id="mem" class="badge badge-primary">0% (0 bytes)</span>
+                  </li>
+                  <li id="net" class="d-flex justify-content-between align-items-center">
+                    Bandwidth
+                    <span class="badge badge-primary">0 byte/s</span>
+                  </li>
+                </ul>
+                <div class="col text-center mt-4">
+
+                  <div class="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" data-action="start" class="btn btn-secondary start" disabled>
+                       <i class="fas fa-play"></i>
+                    </button>
+                    <button type="button" data-action="stop" class="btn btn-secondary stop" disabled>
+                      <i class="fas fa-stop"></i>
+                    </button>
+                    <button type="button" data-action="reboot" class="btn btn-secondary reboot" disabled>
+                      <i class="fas fa-redo-alt"></i>
+                    </button>
+                  </div>
+                </div>
+            </div>
+            {% endblock %}
+          {% endembed %}
+{% endblock %}

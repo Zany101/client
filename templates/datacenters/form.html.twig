@@ -1,0 +1,36 @@
+
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+{{ form_start(form) }}
+
+  <ul class="nav py-2">
+      <li class="nav-item btn-group-sm ml-0" role="group" aria-label="Filters">
+        <button class="btn btn-outline-primary" type="submit"><i class="fas fa-check" aria-hidden="true"></i> Save</button>
+        <button class="btn btn-outline-primary" type="reset"><i class="fas fa-history" aria-hidden="true"></i> Cancel</button>
+        <a class="btn btn-outline-primary" href="{{ app.request.pathinfo  }}/remove">Remove</a>
+      </li>
+  </ul>
+  {% embed 'shared/card.html.twig' %}
+{% block cardHeader %}Datacenter{% endblock %}
+    {% block cardContent %}
+
+    <div class="form-row">
+        <div class="form-group col">
+            {{ form_widget(form.displayName) }}
+            <div class="form-error text-danger">{{ form_errors(form.displayName) }}</div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col">
+            {{ form_widget(form.location) }}
+            <div class="form-error text-danger">{{ form_errors(form.location) }}</div>
+        </div>
+    </div>
+
+    {% endblock %}
+  {% endembed %}
+  {{ form_end(form) }}
+
+{% endblock %}

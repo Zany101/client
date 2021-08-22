@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Products{% endblock %}
+{% block description %}Popular Picks{% endblock %}
+{% block heading_body %}{{ render(controller('App\\Controller\\GamesController::popular')) }}{% endblock %}
+{% block nav %}{% include 'navs/product_nav.html.twig' %}{% endblock %}
+{% block body %}
+
+
+
+{# {% include 'navs/product_nav.html.twig' %} #}
+
+  <div id="products-list" class="row">
+  {% for games in results %}
+      <div class="product col-lg-6">
+          <div class="content">
+            <div class="product-info position-relative">
+              <div class="vertical-center">
+                <a style="font-size: 18px" class="card-title" href="/product/{{games.id}}">{{games.displayName}}</a>
+                  <ul class="pt-4">
+                    <li><?php echo money_formater($_SESSION['currency'], $product['amount'], 1)?> per slot</li>
+                    <li><?php echo money_formater($_SESSION['currency'], $product['amount'], $product['min_slots']) ?> starting</li>
+                  </ul>
+              </div>
+            </div>
+            <div href="/product/{{games.id}}" class="product-image" style="background: url(assets/img/brand/{{games.shortName}}.jpg)">
+              <div class="product-overlay text-center position-relative mx-auto">
+                <div class="vertical-center">
+                  <h6>{{games.displayName}}</h6>
+                  <a href="/product/{{games.id}}" class="btn btn-primary">
+                  Order Now
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+    {% endfor %}
+  </div>
+  <div class="pagination pagination-sm m-0">
+  {{ knp_pagination_render(results) }}
+  </div>
+{% endblock %}

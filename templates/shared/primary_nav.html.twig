@@ -1,0 +1,48 @@
+<style media="screen">
+  .mb {
+    display:none;
+  }
+</style>
+
+<nav class="primary-nav navbar navbar-expand-lg py-0">
+  <a href="/" class="navbar-brand">
+    <img class="brand hidden" src="/images/g879.png" alt="PUSHFULLY">
+  </a>
+  <a href="#" id="sidebarCollapse" class="navbar-brand">
+    <span class="mb">PUSHFULLY</span>
+  </a>
+  <div class="navbar-collapse collapse">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+          <a class="nav-link" href="/support">
+            <span>Support</span>
+          </a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="/billing">
+            <span>Billing</span>
+          </a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="/invoices">
+            <span>Invoices</span>
+          </a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="/services">
+            <span>Services</span>
+          </a>
+      </li>
+      {% include 'shared/login_widget.html.twig' %}
+    </ul>
+  </div>
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a href="/summary" title="cart" id="cart" class="-cart" >
+        <i class="fas fa-shopping-cart"></i>
+        <span id="cart-label" class="badge bg-theme">1</span>
+      </a>
+    </li>
+  </ul>
+
+</nav>

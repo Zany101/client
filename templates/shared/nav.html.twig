@@ -1,0 +1,100 @@
+<nav id="sidebar" class="sidebar  active">
+  <div class="sidebar-header">
+    <h5 class="text-center mb-0">
+        <a href="/" class="navbar-brand">
+          <img class="brand" src="/images/g879.png" alt="">
+        </a>
+      </h5>
+  </div>
+  <ul class="list-unstyled components">
+    {# {% if is_granted('ROLE_ADMIN') %} #}
+    <li>
+      <a class="nav-link dropdown-toggle" href="#sub-users" data-toggle="collapse" aria-expanded="true">
+        <span>Users</span>
+      </a>
+      <ul class="collapse show" id="sub-users">
+        <li>
+          <a class="dropdown-item" href="/users/"><i class="far fa-dot-circle" aria-hidden="true"></i> Manage Users</a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="/users/create"><i class="far fa-dot-circle" aria-hidden="true"></i> New User</a>
+        </li>
+      </ul>
+    </li>
+    {# {% endif %} #}
+    <li>
+      <a class="nav-link dropdown-toggle" href="#services" data-toggle="collapse" aria-expanded="true">
+        <span>Game & Voice Services</span>
+      </a>
+      <ul class="collapse show" id="services">
+        <li>
+          <a class="dropdown-item" href="/services/"><i class="far fa-dot-circle" aria-hidden="true"></i> Game services</a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="/services/"><i class="far fa-dot-circle" aria-hidden="true"></i> Voice services</a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="/services/create"><i class="far fa-dot-circle" aria-hidden="true"></i> New Service</a>
+        </li>
+      </ul>
+    </li>
+    {# {% if is_granted('ROLE_SUPER_USER') %} #}
+    <li>
+      <a class="nav-link dropdown-toggle" href="#support" data-toggle="collapse" aria-expanded="true">
+        <span>Support</span>
+      </a>
+      <ul class="collapse show" id="support">
+        <li>
+          <a class="dropdown-item" href="/support/assigned"><i class="far fa-dot-circle" aria-hidden="true"></i> Assigned Tickets</a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="/support/active"><i class="far fa-dot-circle" aria-hidden="true"></i> Active Tickets</a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="/support/closed"><i class="far fa-dot-circle" aria-hidden="true"></i> Closed Tickets</a>
+        </li>
+      </ul>
+    </li>
+    {# {% endif %} #}
+    <li>
+      <a class="nav-link dropdown-toggle" href="#management" data-toggle="collapse" aria-expanded="true">
+        <span>Server Management</span>
+      </a>
+      <ul class="collapse show" id="management">
+        <li>
+          <a class="dropdown-item" href="/management/datacenters"><i class="far fa-dot-circle" aria-hidden="true"></i> Datacenters</a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="/management/servers"><i class="far fa-dot-circle" aria-hidden="true"></i> Servers</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a class="nav-link dropdown-toggle" href="#system" data-toggle="collapse" aria-expanded="true">
+        <span>System</span>
+      </a>
+      <ul class="collapse show" id="system">
+        <li>
+          <a class="dropdown-item" href="/system"><i class="far fa-dot-circle" aria-hidden="true"></i> Settings</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a class="nav-link dropdown-toggle" href="#billing" data-toggle="collapse" aria-expanded="true">
+        <span>Billing</span>
+      </a>
+      <ul class="collapse show" id="billing">
+        <li>
+          <a class="dropdown-item" href="/services/"><i class="far fa-dot-circle" aria-hidden="true"></i> Invoices</a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="/services/"><i class="far fa-dot-circle" aria-hidden="true"></i> Subscriptions</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+    <a class="nav-link" href="#test">
+      <span>Account</span>
+    </a>
+</nav>
