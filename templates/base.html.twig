@@ -70,17 +70,12 @@
                  'page_description' : block('description'),
             } only
         %}
-        
+
         {% block nav %}{% endblock %}
 
 
 
         <section class="content">
-        <div class="container">
-            <div class="py-3 mb-4" style="background: #1f1f1f;">
-              <div class="bread-crumb">{{ breadcrumbs(" &raquo; ", "Home", null, 'filemanager') }}</div>
-            </div>
-        </div>
 					<div class="container">{% block body %}{% endblock %}</div>
 				</section>
 

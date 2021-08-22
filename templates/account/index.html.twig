@@ -3,8 +3,59 @@
 {% block title %}Client Area{% endblock %}
 {% block description %}My Account{% endblock %}
 {% block nav %}
-  {% include 'account/nav.html.twig' %}
+    {%
+        include 'navs/secondary_nav.html.twig' with {
+            'nav' : {
+             'Account Information' : 'account',
+             'Login Credentials' : 'login-credentials',
+             'Settings' : 'settings',
+             'Sub Users' : 'sub-users',
+            }
+        } only
+    %}
 {% endblock %}
 {% block body %}
-test
+
+
+
+<div class="row">
+  <div class="col">
+    {% embed 'shared/card.html.twig' %}
+      {% block cardContent %}
+      <h5 class="card-title">Account Information</h5>
+      <p class="card-text"><i class="fas fa-exclamation-circle"></i> Account Number {{ user.id }}</p>
+      <p class="card-text"><i class="far fa-user"></i> {{ user.firstName ~ " " ~ user.lastName }}</p>
+      <p class="card-text"><i class="fas fa-map-marker-alt"></i>
+        {{user.address}} <br>
+        {{ user.zip ~ " " ~ user.city}} <br>
+        {{user.country}} <br>
+      </p>
+      <p class="card-text"><i class="fas fa-envelope"></i> {{ user.email }}</p>
+      <p class="card-text"><i class="fas fa-phone-alt"></i> {{ user.homePhone }}</p>
+      {% endblock cardContent %}
+      {% block cardFooter %}
+      <a href="#" class="btn btn-primary card-link">Edit</a>
+      {% endblock %}
+    {% endembed %}
+  </div>
+  <div class="col">
+    {% embed 'shared/card.html.twig' %}
+      {% block cardContent %}
+      <h5 class="card-title">Email Preferences</h5>
+      <p class="card-text">You will receive invoices and other billing-related emails at the following email address <b>{{ user.email }}</b>.</p>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+        <label class="form-check-label" for="flexCheckChecked">
+          Subscribe to our newsletter.
+        </label>
+      </div>
+      {% endblock cardContent %}
+      {% block cardFooter %}
+      <a href="#" class="btn btn-primary card-link">Change Email Address</a>
+      {% endblock %}
+    {% endembed %}
+  </div>
+</div>
+
+
 {% endblock %}

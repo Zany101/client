@@ -1,4 +1,11 @@
 <div class="card {% block cardCss %}{% endblock %}">
-<div class="card-header">{% block cardHeader %}{% endblock %}</div>
-    <div class="card-body">{% block cardContent %}{% endblock %}</div>
+    {% if block('cardHeader') %}
+      <div class="card-header">{% block cardHeader %}{% endblock %}</div>
+    {% endif %}
+    {% if block('cardContent') %}
+      <div class="card-body">{% block cardContent %}{% endblock %}</div>
+    {% endif %}
+    {% if block('cardFooter') %}
+      <div class="card-footer text-muted">{% block cardFooter %}{% endblock %}</div>
+    {% endif %}
 </div>

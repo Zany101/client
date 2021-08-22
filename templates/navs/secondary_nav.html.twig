@@ -5,8 +5,8 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        {% for item in nav %}
-            <li class="nav-item"><a class="nav-link " href="/product/?flt=game">{{item}}</a></li>
+        {% for key,item in nav %}
+            <li class="nav-item"><a class="nav-link " href="{{item}}">{{key}}</a></li>
         {% endfor %}
         {# {% block left %}{% endblock %} #}
       </ul>
