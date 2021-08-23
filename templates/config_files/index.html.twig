@@ -1,30 +1,30 @@
-{% extends 'base.html.twig' %}
-{% block title %}Server{% endblock %}
 
-{% block body %}
 
 {% embed 'shared/card.html.twig'%}
 
-{% block cardHeader %}Game Servers{% endblock %}
+{% block cardHeader %}Config Files{% endblock %}
   {% block cardContent %}
-  {% embed 'shared/table.twig' %}
-  {% block tableHead %}
-    <th title="Sort" scope="col">Description</th>
-    <th title="Sort" class="text-center" scope="col">Action</th>
-  {% endblock tableHead %}
-  {% block tableBody %}
-    {% for config in results %}
-    <tr id="test" data-selectable='true' class="w-50" data-action="open" data-type="file" class="clickable-row" data-target="{{config.fileId}}">
-      <td class="w-75">{{config.Description}}</td>
-      <td class="text-center"></td>
-    </tr>
-    {% endfor %}
-  {% endblock tableBody %}
-  {% endembed %}
+  {%
+      include 'shared/table.twig' with {
+          row : {
+            'id' : {
+                'property' : 'fileId',
+                'object' : null
+            },
+            'Description' : {
+                'property' : 'Description',
+                'object' : null
+            },
+          },
+          results : results
+      } only
+  %}
   {% endblock cardContent %}
 {% endembed %}
 
-{% endblock %}
+
+
+
 
 {% block javascripts %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/theme/liquibyte.min.css" integrity="sha512-Y7pMcSVpVg6myekc9dUdUfQJH3N+pzobSxFW+HBD19xmYfCHOJYv68kyj4uH0Afrs96o3BWW1y/D/cWd8HC5kg==" crossorigin="anonymous" referrerpolicy="no-referrer" />

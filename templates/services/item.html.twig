@@ -7,7 +7,7 @@
 
           {% embed 'shared/card.html.twig'%}
 
-          {% block cardHeader %}{{services.game.displayName}} - {{services.ipAddress}} : {{services.gamePort}}{% endblock %}
+        {% block cardHeader %}{{results.game.displayName}} - {{results.ipAddress}} : {{results.gamePort}}{% endblock %}
             {% block cardContent %}
             <ul class="nav py-2">
       					<li class="nav-item btn-group-sm ml-0" role="group" aria-label="navigation">
@@ -25,19 +25,19 @@
                 <ul class="col">
                   <li class="d-flex justify-content-between align-items-center">
                     Connection Info
-                    <span class="badge badge-primary">{{services.ipAddress}} : {{services.gamePort}}</span>
+                    <span class="badge badge-primary">{{results.ipAddress}} : {{results.gamePort}}</span>
                   </li>
                   <li class="d-flex justify-content-between align-items-center">
                     Query Info
-                    <span class="badge badge-primary">{{services.ipAddress}} : {{services.queryPort}}</span>
+                    <span class="badge badge-primary">{{results.ipAddress}} : {{results.queryPort}}</span>
                   </li>
                   <li class="d-flex justify-content-between align-items-center">
                     Rcon Info
-                    <span class="badge badge-primary">{{services.ipAddress}} : {{services.rconPort}}</span>
+                    <span class="badge badge-primary">{{results.ipAddress}} : {{results.rconPort}}</span>
                   </li>
                   <li class="d-flex justify-content-between align-items-center">
                     Status
-                    <span id="pid" class="badge badge-primary">{{services.pid|proccess}}</span>
+                    <span id="pid" class="badge badge-primary">{{results.pid|proccess}}</span>
                   </li>
                 </ul>
                 <ul class="col">
@@ -72,4 +72,40 @@
             </div>
             {% endblock %}
           {% endembed %}
+
+
+          {{
+            render(controller('App\\Controller\\LogFileController::retrieve',
+              {
+                'id' : app.request.get('id')
+              }
+            ))
+          }}
+
+          {{
+            render(controller('App\\Controller\\CommandLineController::index',
+              {
+                'id' : app.request.get('id')
+              }
+            ))
+          }}
+
+          {{
+            render(controller('App\\Controller\\ConfigFilesController::index',
+              {
+                'id' : app.request.get('id')
+              }
+            ))
+          }}
+
+          {{
+            render(controller('App\\Controller\\ActivityController::index',
+              {
+                'id' : app.request.get('id')
+              }
+            ))
+          }}
+
+
+
 {% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Client Area{% endblock %}
+{% block description %}My Account{% endblock %}
+{% block nav %}
+    {%
+        include 'navs/secondary_nav.html.twig' with {
+            'nav' : {
+             'Account Information' : 'account',
+             'Login Credentials' : 'login-credentials',
+             'Sub Users' : 'sub-users',
+            }
+        } only
+    %}
+{% endblock %}
+{% block body %}
+
+{% endblock %}

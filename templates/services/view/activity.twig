@@ -1,0 +1,35 @@
+{% embed 'shared/card.html.twig'%}
+
+{% block cardHeader %}
+<?php echo $query['gq_hostname'] ?>
+<span class="float-right">
+  <a href="<?php echo $query['gq_joinlink'] ?>">Join</a>
+  <?php echo $query['gq_mapname']," (",$query['num_players'],"/",$query['max_players'],")" ?>
+</span>
+{% endblock %}
+
+{% block cardContent %}
+
+{%
+    include 'shared/table.twig' with {
+        row : {
+          'Player Name' : {
+              'property' : 'serviceId',
+              'object' : null
+          },
+          'score' : {
+              'property' : 'userName',
+              'object' : 'user'
+          },
+          'Duration' : {
+              'property' : 'displayName',
+              'object' : 'server'
+          },
+        },
+        results : results
+    } only
+%}
+
+{% endblock cardContent %}
+
+{% endembed %}

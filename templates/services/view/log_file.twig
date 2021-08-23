@@ -1,10 +1,7 @@
-
-
-{% block body %}
 {% embed 'shared/card.html.twig' %}
 {% block cardHeader %}Log File{% endblock %}
 {% block cardContent %}
- <textarea id="editor" name="name" rows="8" cols="80">{{results}}</textarea>
+ <textarea id="editor" name="name" rows="8" cols="80">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</textarea>
 {% endblock %}
 {% endembed %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/codemirror.min.js" integrity="sha512-i9pd5Q6ntCp6LwSgAZDzsrsOlE8SN+H5E0T5oumSXWQz5l1Oc4Kb5ZrXASfyjjqtc6Mg6xWbu+ePbbmiEPJlDg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -13,7 +10,5 @@
 <script src="{{ asset('scripts/codemirror.js')}}"></script>
 <script type="text/javascript">
 editor = CodeMirror.fromTextArea(document.getElementById('editor'), editor);
-editor.setSize('100%', '300px');
 editor.setOption('readOnly', true);
 </script>
-{% endblock %}

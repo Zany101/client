@@ -13,36 +13,37 @@
   </a>
   <div class="navbar-collapse collapse">
     <ul class="navbar-nav ml-auto">
+    {%
+      for key,item in
+      {
+          'dashboard' : null,
+          'support' : 'support',
+          'billing' : 'billing',
+          'invoices' : 'invoices',
+          'services' : 'services',
+      }
+    %}
+
+    <li class="nav-item">
+        <a class="nav-link" href="/{{item}}">
+          <span>{{key}}</span>
+        </a>
+    </li>
+
+    {% endfor %}
       <li class="nav-item">
-          <a class="nav-link" href="/support">
-            <span>Support</span>
+          <a class="nav-link" href="/account">
+          <i class="fas fa-user"></i>
+          <span>{{ app.user.username }}</span>
           </a>
       </li>
-      <li class="nav-item">
-          <a class="nav-link" href="/billing">
-            <span>Billing</span>
-          </a>
+      <li class="nav-link">
+        <a href="/summary">
+          <i class="fas fa-shopping-cart"></i>
+          <span id="cart-label" class="badge bg-theme">1</span>
+        </a>
       </li>
-      <li class="nav-item">
-          <a class="nav-link" href="/invoices">
-            <span>Invoices</span>
-          </a>
-      </li>
-      <li class="nav-item">
-          <a class="nav-link" href="/services">
-            <span>Services</span>
-          </a>
-      </li>
-      {% include 'shared/login_widget.html.twig' %}
     </ul>
   </div>
-  <ul class="navbar-nav">
-    <li class="nav-item">
-      <a href="/summary" title="cart" id="cart" class="-cart" >
-        <i class="fas fa-shopping-cart"></i>
-        <span id="cart-label" class="badge bg-theme">1</span>
-      </a>
-    </li>
-  </ul>
 
 </nav>

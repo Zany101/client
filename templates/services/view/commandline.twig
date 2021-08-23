@@ -1,14 +1,9 @@
 
-<ul class="nav py-2">
-    <li class="nav-item btn-group-sm ml-0" role="group" aria-label="Filters">
-      <a class="btn btn-outline-primary" href="{{ app.request.uri }}/create">New</a>
-      <button class="btn btn-outline-primary" type="reset"><i class="fas fa-history" aria-hidden="true"></i> Cancel</button>
-    </li>
-</ul>
 {% embed 'shared/card.html.twig'%}
 
-{% block cardHeader %}Game Servers{% endblock %}
+{% block cardHeader %}Command lines{% endblock %}
   {% block cardContent %}
+
   {%
       include 'shared/table.twig' with {
           row : {
@@ -25,8 +20,18 @@
                 'object' : null
             },
           },
-          results : results
+          results : cmdlines
       } only
   %}
-  {% endblock cardContent %}
+
+{% endblock %}
+
+{% block cardFooter %}
+<ul class="nav py-2">
+    <li class="nav-item btn-group-sm ml-0" role="group" aria-label="Filters">
+      <a class="btn btn-outline-primary" href="{{ app.request.uri }}/create">New</a>
+      <button class="btn btn-outline-primary" type="reset"><i class="fas fa-history" aria-hidden="true"></i> Cancel</button>
+    </li>
+</ul>
+{% endblock %}
 {% endembed %}

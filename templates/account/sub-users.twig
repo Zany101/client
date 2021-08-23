@@ -1,0 +1,65 @@
+{% extends 'account/base.twig' %}
+
+{% block title %}Client Area{% endblock %}
+{% block description %}My Account{% endblock %}
+
+{% block body %}
+<div class="row">
+  <div class="col-8">
+  {% embed 'shared/card.html.twig' %}
+    {% block cardContent %}
+
+    {%
+        include 'shared/table.twig' with {
+            row : {
+              'id' : {
+                  'property' : 'id',
+                  'object' : null
+              },
+              'username' : {
+                  'property' : 'userName',
+                  'object' : null
+              },
+              'role' : {
+                  'property' : 'roleId',
+                  'object' : null
+              },
+              'status' : {
+                  'property' : 'status',
+                  'object' : null
+              },
+              'first name' : {
+                  'property' : 'firstName',
+                  'object' : null
+              },
+              'last name' : {
+                  'property' : 'lastName',
+                  'object' : null
+              },
+              'email' : {
+                  'property' : 'email',
+                  'object' : null
+              },
+            },
+            results : results
+        } only
+    %}
+
+    {% endblock %}
+    {% endembed %}
+  </div>
+  <div class="col-4">
+  {% embed 'shared/card.html.twig' %}
+    {% block cardContent %}
+
+    <p>Sub users are a way for you to have multiple users that can help you manage your server(s).</p>
+
+    {% endblock %}
+    {% block cardFooter %}
+    <a href="#" class="btn btn-primary card-link">Create new user</a>
+
+    {% endblock %}
+    {% endembed %}
+  </div>
+</div>
+{% endblock %}

@@ -32,6 +32,7 @@ class AppExtension extends AbstractExtension
             new TwigFilter("boolean", [$this, "boolean"]),
             new TwigFilter("proccess", [$this, "proccess"]),
             new TwigFilter("game_type", [$this, "game_type"]),
+            new TwigFilter("string_to_symbols", [$this, "string_to_symbols"]),
         ];
     }
 
@@ -48,6 +49,11 @@ class AppExtension extends AbstractExtension
       }
 
       return;
+    }
+
+    public function string_to_symbols($string, $symbol = "*")
+    {
+        return str_repeat ($symbol, strlen ($string));
     }
 
     public function print_r($object)

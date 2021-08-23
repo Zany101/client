@@ -16,6 +16,7 @@ use phpseclib3\Net\SSH2;
 use phpseclib3\File\ANSI;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Service\RemoteService;
+use App\Entity\ServiceCustomCmdlines;
 
 class ServicesController extends AbstractController
 {
@@ -298,7 +299,7 @@ class ServicesController extends AbstractController
      /**
       * @Route("/services/{id}")
       */
-     public function item($id, Services $service)
+     public function item($id, Services $service, Request $request, PaginatorInterface $paginator)
      {
 
         $user = $this->getUser();
@@ -308,13 +309,23 @@ class ServicesController extends AbstractController
                 'No product found for id ' . $id
             );
         }
-         //
-         // $services = $this->getDoctrine()
-         //     ->getRepository(Services::class)
-         //     ->findOneBy([
-         //       'serviceId' => $id,
-         //       'userId' => $user->getId()
-         //     ]);
+
+          // CommandLines
+          $em = $this->getDoctrine()->getManager();
+
+          $servicesRepository = $em->getRepository(ServiceCustomCmdlines::class);
+
+          $allServicesQuery = $servicesRepository->createQueryBuilder('u')
+           ->where('u.serviceId = :service')
+           ->setParameter('service', $id)
+           ->getQuery();
+
+          $cmdlines = $paginator->paginate(
+              $allServicesQuery, /* query NOT result */
+              $request->query->getInt('page', 1), /*page number*/
+              $request->query->getInt('limit', 10), /*page number*/
+          );
+
 
          if ($service->getUser()->getId() != $user->getId()) {
              throw $this->createNotFoundException(
@@ -325,7 +336,8 @@ class ServicesController extends AbstractController
 
 
          return $this->render('services/item.html.twig', [
-             'services' => $service,
+             'results' => $service,
+             'cmdlines' => $cmdlines
          ]);
      }
 }
