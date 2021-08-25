@@ -5,22 +5,12 @@
 
 {% block body %}
 
+
           {% embed 'shared/card.html.twig'%}
 
-        {% block cardHeader %}{{results.game.displayName}} - {{results.ipAddress}} : {{results.gamePort}}{% endblock %}
+        {% block cardHeader %}{% endblock %}
             {% block cardContent %}
-            <ul class="nav py-2">
-      					<li class="nav-item btn-group-sm ml-0" role="group" aria-label="navigation">
-                  <a href="{{ app.request.pathinfo  }}/filemanager" class="btn btn-outline-primary"><i class="fas fa-folder-open"></i> FileManager</a>
-      						<a href="{{ app.request.pathinfo  }}/command" class="btn btn-outline-primary"><i class="fas fa-terminal"></i> Commandline</a>
-      						<a href="{{ app.request.pathinfo  }}/logs" class="btn btn-outline-primary"><i class="fas fa-file"></i> Log File</a>
-      						<a href="{{ app.request.pathinfo  }}/update" class="btn btn-outline-primary"><i class="fab fa-steam"></i> Update</a>
-                  <a href="{{ app.request.pathinfo  }}/activity" class="btn btn-outline-primary"><i class="fas fa-chart-line"></i> Activity</a>
-                  <a href="{{ app.request.pathinfo  }}/tasks" class="btn btn-outline-primary"><i class="fas fa-calendar-alt"></i> Tasks</a>
-                  <a href="{{ app.request.pathinfo  }}/config" class="btn btn-outline-primary"><i class="fas fa-cog"></i> Config</a>
-                  <a href="{{ app.request.pathinfo  }}/reinstall" class="btn btn-outline-primary"><i class="fas fa-redo"></i> Reinstall</a>
-      					</li>
-      			</ul>
+            <h5 class="card-title">{{results.game.displayName}} - {{results.ipAddress}} : {{results.gamePort}}</h5>
             <div class="row">
                 <ul class="col">
                   <li class="d-flex justify-content-between align-items-center">
@@ -71,8 +61,49 @@
                 </div>
             </div>
             {% endblock %}
+          {% block cardFooter %}
+            <div class="nav-item btn-group-sm ml-0" role="group" aria-label="navigation">
+                <a href="{{ app.request.pathinfo  }}/filemanager" class="btn btn-primary card-link"><i class="fas fa-folder-open"></i>FileManager</a>
+                <a href="{{ app.request.pathinfo  }}/update" class="btn btn-primary card-link"><i class="fab fa-steam"></i>Check For Updates</a>
+                <a href="{{ app.request.pathinfo  }}/reinstall" class="btn btn-primary card-link"><i class="fas fa-redo"></i>Reinstall</a>
+            </div>
+          {% endblock %}
+
           {% endembed %}
 
+
+          <div class="row">
+            <div class="col">
+            {# {{
+              render(controller('App\\Controller\\CommandLineController::index',
+                {
+                  'id' : app.request.get('id')
+                }
+              ))
+            }} #}
+            {% embed 'shared/card.html.twig' %}
+              {% block cardContent %}
+              <h5 class="card-title">Command Line</h5>
+              <p>{{results.cmdline}}</p>
+
+              {% endblock cardContent %}
+              {% block cardFooter %}
+              <div class="nav-item btn-group-sm ml-0" role="group" aria-label="navigation">
+                  <a href="{{ app.request.pathinfo  }}/command-line" class="btn btn-primary card-link">Edit</a>
+              </div>
+              {% endblock %}
+            {% endembed %}
+            </div>
+            <div class="col">
+            {{
+              render(controller('App\\Controller\\ConfigFilesController::index',
+                {
+                  'id' : app.request.get('id')
+                }
+              ))
+            }}
+            </div>
+          </div>
 
           {{
             render(controller('App\\Controller\\LogFileController::retrieve',
@@ -82,29 +113,15 @@
             ))
           }}
 
-          {{
-            render(controller('App\\Controller\\CommandLineController::index',
-              {
-                'id' : app.request.get('id')
-              }
-            ))
-          }}
 
-          {{
-            render(controller('App\\Controller\\ConfigFilesController::index',
-              {
-                'id' : app.request.get('id')
-              }
-            ))
-          }}
 
-          {{
+          {# {{
             render(controller('App\\Controller\\ActivityController::index',
               {
                 'id' : app.request.get('id')
               }
             ))
-          }}
+          }} #}
 
 
 

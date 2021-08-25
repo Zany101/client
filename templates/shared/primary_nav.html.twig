@@ -31,12 +31,22 @@
     </li>
 
     {% endfor %}
+      {% if app.user %}
       <li class="nav-item">
           <a class="nav-link" href="/account">
           <i class="fas fa-user"></i>
           <span>{{ app.user.username }}</span>
           </a>
       </li>
+      {% else %}
+
+        <li class="nav-item">
+            <a class="nav-link" href="/login">
+            <span>Login</span>
+            </a>
+        </li>
+      {% endif %}
+
       <li class="nav-link">
         <a href="/summary">
           <i class="fas fa-shopping-cart"></i>

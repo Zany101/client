@@ -12,9 +12,7 @@ use Knp\Component\Pager\PaginatorInterface;
 use App\Form\CommandFormType;
 use App\Entity\Services;
 use App\Entity\User;
-/**
-* @Route("/services/{id}/command" ,name="command_line")
-*/
+
 class CommandLineController extends AbstractController
 {
     /**
@@ -97,24 +95,24 @@ class CommandLineController extends AbstractController
       ]);
     }
 
+
     /**
-    * @Route("/{cmd}" )
+    * @Route("/services/{id}/command-line" ,name="command_line")
     */
-    public function  edit(Request $request,$id,$cmd) : Response {
+    public function  edit(Request $request,$id) : Response {
 
-            $service = $this->getDoctrine()->getRepository(Service::class)->find($id);
+            $service = $this->getDoctrine()->getRepository(Services::class)->find($id);
+              dump($service);
+            $command = $service->getCmdline();
 
-            $command = $this->getDoctrine()->getRepository(ServiceCustomCmdlines::class)->find($cmd);
 
-            $command->setService($service);
-
-              $command->setCmdline(str_replace(array("?",  "-"), "", $command->getCmdline()));
+              $service->setCmdline(str_replace(array("?",  "-"), "", $command));
 
             if (!$service) {
                  throw $this->createNotFoundException();
              }
 
-            $form = $this->createForm(CommandFormType::class,$command);
+            $form = $this->createForm(CommandFormType::class,$service);
 
             $form->handleRequest($request);
             if($form->isSubmitted() && $form->isValid()) {

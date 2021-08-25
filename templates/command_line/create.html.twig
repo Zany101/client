@@ -1,26 +1,12 @@
-{% extends 'base.html.twig' %}
+{% extends 'form.twig' %}
 
 {% block body %}
-{{ form_start(form) }}
-    <ul class="nav py-2">
-        <li class="nav-item btn-group-sm ml-0" role="group" aria-label="Filters">
-          <button class="btn btn-outline-primary" type="submit"><i class="fas fa-check" aria-hidden="true"></i> Save</button>
-          <button class="btn btn-outline-primary" type="reset"><i class="fas fa-history" aria-hidden="true"></i> Cancel</button>
-          {% if app.request.get("cmd") %}
-            <a class="btn btn-outline-primary" href="{{ app.request.uri }}/delete"><i class="fas fa-history" aria-hidden="true"></i> Delete</a>
-          {% endif %}
-        </li>
-    </ul>
+
   {% embed 'shared/card.html.twig' %}
   {% block cardHeader %}New Command Line{% endblock %}
     {% block cardContent %}
-    {# Valid paramaters are, Username,Password and confirm #}
 
         <div class="form-row">
-            <div class="form-group col-lg-2">
-                {{ form_widget(form.description) }}
-                <div class="form-error">{{ form_errors(form.description) }}</div>
-            </div>
             <div class="col-lg-10">
               <div data-toggle="tooltip" data-placement="top" title="Default command line" class="form-group">
                   <input class="form-control" type="text" disabled="disabled" value="{{services.getGame.Cmdlines.CmdlineDefault}}">
@@ -30,12 +16,28 @@
         <div class="form-row">
             <div class="form-group mb-0 col-lg-12">
               {{ form_widget(form.cmdline) }}
-              <small class="d-flex align-items-end">{{ form_help(form.cmdline) }}<a class="pl-1" data-toggle="modal" data-target="#exampleModal" href="#">?</a></small>
+              <small class="d-flex align-items-end">{{ form_help(form.cmdline) }}<a class="pl-1" data-toggle="modal" data-target=".modal" href="#">?</a></small>
               <div class="form-error text-danger">{{ form_errors(form.cmdline) }}</div>
             </div>
         </div>
     {% endblock %}
   {% endembed %}
   {{ form_end(form) }}
-
+  <div class="modal" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Understood</button>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}

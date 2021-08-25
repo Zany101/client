@@ -1,0 +1,26 @@
+
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+  {% block head %}
+    {%
+      include 'shared/head.twig'
+    %}
+  {% endblock %}
+  </head>
+  <body>
+
+
+    <section>
+      <div class="container" style="width:720px;">
+          <div class="clearfix mb-4">
+            <img class="d-inline brand" src="/images/g879.png" alt="PUSHFULLY">
+            <a class="d-inline float-right" href="{{ app.request.headers.get('referer') }}"><i class="far fa-window-close" style="font-size: xxx-large;"></i></a>
+          </div>
+          {% block body %}{% endblock %}
+      </div>
+    </section>
+
+  </body>
+</html>

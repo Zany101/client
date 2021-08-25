@@ -23,7 +23,7 @@
       <p class="card-text"><i class="fas fa-phone-alt"></i> {{ user.homePhone }}</p>
       {% endblock cardContent %}
       {% block cardFooter %}
-      <a href="#" class="btn btn-primary card-link">Edit</a>
+      <a href="{{ app.request.pathinfo  }}/edit" class="btn btn-primary card-link">Edit</a>
       {% endblock %}
     {% endembed %}
   </div>
@@ -40,7 +40,7 @@
       </div>
       {% endblock cardContent %}
       {% block cardFooter %}
-      <a href="#" class="btn btn-primary card-link">Change Email Address</a>
+      <a href="{{ app.request.pathinfo  }}/change-email" class="btn btn-primary card-link">Change Email Address</a>
       {% endblock %}
     {% endembed %}
   </div>

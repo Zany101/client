@@ -112,8 +112,21 @@ class SupportController extends AbstractController
         $user = $this->getUser();
         $form = $this->createForm(TicketReplyType::class);
 
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository(SupportTicketReplies::class);
+        $query = $repository
+            ->createQueryBuilder('t')
+            ->where('t.userId = :uid' )
+            ->andWhere('t.ticketId = :tid' )
+            ->orderBy('t.createdOn', 'ASC')
+            ->setParameter('uid',  $user->getId())
+            ->setParameter('tid',  $id)
+            ->getQuery();
+
+
+
         $replies = $paginator->paginate(
-            $ticket->getReplies(),
+            $query,
             $request->query->getInt('page', 1) /*page number*/,
             $request->query->getInt('limit', 10) /*page number*/
         );

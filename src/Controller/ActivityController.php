@@ -28,8 +28,6 @@ class ActivityController extends AbstractController
           'type' =>  'source',
           'host' => $service->getIpAddress().":".$service->getGamePort(),
       ]);
-      dump($GameQ->process());
-      die;
 
 
             $results = $paginator->paginate(
@@ -43,7 +41,8 @@ class ActivityController extends AbstractController
 
 
         return $this->render('activity/index.html.twig', [
-            'results' => $results
+            'results' => $results,
+            'host' => $host
         ]);
     }
 }

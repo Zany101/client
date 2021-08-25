@@ -9,6 +9,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use App\Form\AccountType;
+use App\Form\EmailType;
+use App\Form\ChangePasswordType;
 
 class AccountController extends AbstractController
 {
@@ -25,7 +29,7 @@ class AccountController extends AbstractController
     }
 
     /**
-     * @Route("/login-credentials", name="login-credentials")
+     * @Route("account/login-credentials", name="login-credentials")
      */
     public function credentials(): Response
     {
@@ -34,6 +38,45 @@ class AccountController extends AbstractController
         return $this->render('account/login_credentials.twig', [
             'user' => $user,
         ]);
+    }
+
+    /**
+     * @Route("sub-users/create")
+     */
+    public function  create(Request $request) : Response {
+      $user = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->find(3);
+
+        $user = new User();
+
+        // creates a task object and initializes some data for this example
+        // creates a task object and initializes some data for this example
+        // // $user->setUsername('Write a blog post');
+        $user->setSubuserOwnerId(3);
+        $form = $this->createForm(AccountType::class,$user);
+
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()) {
+          $user = $form->getData();
+
+          $user->setPassword($this->passwordHasher->hashPassword(
+             $user,
+             'the_new_password'
+          ));
+
+
+          $entityManager = $this->getDoctrine()->getManager();
+          $entityManager->persist($user);
+          $entityManager->flush();
+
+          return $this->redirectToRoute('users');
+
+        }
+
+      return $this->render('users/form.html.twig',[
+        'form' => $form->createView(),
+      ]);
     }
 
     /**
@@ -74,4 +117,93 @@ class AccountController extends AbstractController
           "roles" => $roles,
         ]);
     }
+
+    /**
+    * @Route("/account/change-email", name="change-email")
+    */
+    public function  changeEmail(Request $request) : Response {
+
+      $user = $this->getUser();
+
+      $form = $this->createForm(EmailType::class,$user);
+
+      $form->handleRequest($request);
+      if($form->isSubmitted() && $form->isValid()) {
+        $user = $form->getData();
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($user);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('account');
+
+      }
+
+      return $this->render('account/change_email.twig',[
+        'form' => $form->createView(),
+      ]);
+    }
+
+    /**
+    * @Route("/account/change-password", name="change-password")
+    */
+    public function  changePassword(Request $request) : Response {
+
+      $user = $this->getUser();
+
+      $form = $this->createForm(ChangePasswordType::class,$user);
+
+      $form->handleRequest($request);
+      if($form->isSubmitted() && $form->isValid()) {
+        $user = $form->getData();
+
+        $user->setPassword($this->passwordHasher->hashPassword(
+           $user,
+           $user->getPassword()
+        ));
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($user);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('account');
+
+      }
+
+      return $this->render('account/change_password.twig',[
+        'form' => $form->createView(),
+      ]);
+    }
+
+    /**
+    * @Route("/account/edit", name="app_account_edit")
+    */
+    public function  edit(Request $request) : Response {
+
+      $user = $this->getUser();
+
+      $user = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->find($user->getId());
+
+      $form = $this->createForm(AccountType::class,$user);
+
+      $form->handleRequest($request);
+      if($form->isSubmitted() && $form->isValid()) {
+        $user = $form->getData();
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($user);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('account');
+
+      }
+
+    return $this->render('users/form.html.twig',[
+      'form' => $form->createView(),
+      'user' => $user
+    ]);
+    }
+
 }

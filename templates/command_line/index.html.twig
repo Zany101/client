@@ -1,14 +1,9 @@
 
-<ul class="nav py-2">
-    <li class="nav-item btn-group-sm ml-0" role="group" aria-label="Filters">
-      <a class="btn btn-outline-primary" href="{{ app.request.uri }}/create">New</a>
-      <button class="btn btn-outline-primary" type="reset"><i class="fas fa-history" aria-hidden="true"></i> Cancel</button>
-    </li>
-</ul>
+
 {% embed 'shared/card.html.twig'%}
 
-{% block cardHeader %}Game Servers{% endblock %}
   {% block cardContent %}
+  <h5 class="card-title">Command Line</h5>
   {%
       include 'shared/table.twig' with {
           row : {
@@ -29,4 +24,9 @@
       } only
   %}
   {% endblock cardContent %}
+  {% block cardFooter %}
+    <div class="nav-item btn-group-sm ml-0" role="group" aria-label="navigation">
+        <a href="{{ app.request.pathinfo  }}/filemanager" class="btn btn-primary card-link"><i class="fas fa-folder-open"></i>Edit</a>
+    </div>
+  {% endblock %}
 {% endembed %}

@@ -1,8 +1,8 @@
-<div class="card {% block cardCss %}{% endblock %}">
+<div class="card {% block cardCss %}{% endblock %} mb-4">
     {% if block('cardHeader') %}
       <div class="card-header">{% block cardHeader %}{% endblock %}</div>
     {% endif %}
-    {% if block('cardContent') %}
+    {% if block('cardContent') is defined %}
       <div class="card-body">{% block cardContent %}{% endblock %}</div>
     {% endif %}
     {% if block('cardFooter') %}

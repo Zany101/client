@@ -1,0 +1,29 @@
+{% extends 'form.twig' %}
+
+{% block body %}
+
+{{ form_start(form) }}
+  {% embed 'shared/card.html.twig' %}
+    {% block cardContent %}
+
+          <div class="form-row">
+              <div class="form-group col">
+                  {{ form_widget(form.email) }}
+                  <div class="form-error">{{ form_errors(form.email) }}</div>
+              </div>
+          </div>
+
+    {% endblock cardContent %}
+
+    {% block cardFooter %}
+    <div class="nav-item btn-group-sm ml-0" role="group" aria-label="navigation">
+      <button class="btn btn-primary card-link" type="submit" name="button">Save</button>
+      <button class="btn btn-primary card-link" type="reset" name="button">Cancel</button>
+    </div>
+
+    {% endblock %}
+
+  {% endembed %}
+  {{ form_end(form) }}
+
+{% endblock body %}

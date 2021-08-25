@@ -14,23 +14,30 @@
 
 {% block cardContent %}
 
-{% embed 'shared/table.twig'%}
+{%
+    include 'shared/table.twig' with {
+        row : {
+          'id' : {
+              'property' : 'description',
+              'object' : null
+          },
+          'Player Name' : {
+              'property' : 'description',
+              'object' : null
+          },
+          'Score' : {
+              'property' : 'cmdline',
+              'object' : 'user'
+          },
+          'Duration' : {
+              'property' : null,
+              'object' : null
+          },
+        },
+        results : results
+    } only
+%}
 
-{% block tableHead %}
-<th title="Sort" scope="col">Player Name</th>
-<th title="Sort" class="text-center" scope="col">Score</th>
-<th title="Sort" class="text-center" scope="col">Duration</th>
-{% endblock tableHead %}
-
-{% block tableBody %}
-<tr>
-<td class="w-50"><?php echo $player['name'] ?></td>
-<td class="text-center"><?php echo $player['score'] ?></td>
-<td class="text-center"><?php echo $player['time'] ?></td>
-</tr>
-{% endblock tableBody %}
-
-{% endembed %}
 
 {% endblock cardContent %}
 

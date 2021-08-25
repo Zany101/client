@@ -22,36 +22,40 @@
         </ul>
     </div>
     <div class="col-10 pl-0">
-        {% embed 'shared/table.twig'%}
-        {% block tableHead %}
-        <tr>
-            <th colspan="5" class="bread-crumb">{{ breadcrumbs(" &raquo; ", "Filemanager", 'filemanager', null) }}</th>
-        </tr>
-        <tr>
-            <th title="Sort" scope="col">{{ knp_pagination_sortable(results, 'Name', 'filename') }}</th>
-            <th title="Sort" class="text-center" scope="col">{{ knp_pagination_sortable(results, 'Owner', 'uid') }}</th>
-            <th title="Sort" class="text-center" scope="col">{{ knp_pagination_sortable(results, 'Type', 'type') }}</th>
-            <th title="Sort" class="text-center" scope="col">{{ knp_pagination_sortable(results, 'Size', 'size') }}</th>
-            <th title="Sort" class="text-center" scope="col">{{ knp_pagination_sortable(results, 'Last edited', 'atime') }}</th>
-        </tr>
-        {% endblock tableHead %}
-        {% block tableBody %}
-        {% if app.request.get('path') %}
-        <tr data-selectable='false' class="w-50" data-action="open" data-type="dir" data-target="..">
-            <td colspan="6">..</td>
-        </tr>
-        {% endif %}
-        {% for file in results %}
-        <tr data-selectable='true' class="w-50" data-action="open" data-type="{{file.type == 2 ? "dir" : "file"}}" data-target="{{file.filename}}">
-            <td >{{file.filename}}</td>
-            <td class="text-center">{{file.uid}}</td>
-            <td class="text-center">{{file.type == 2 ? "dir" : "file"}}</td>
-            <td class="text-center">{{ size(file.size)}}</td>
-            <td class="text-center">{{ date(file.mtime) }}</td>
-        </tr>
-        {% endfor %}
-        {% endblock %}
-        {% endembed %}
+
+
+    {%
+        include 'shared/table.twig' with {
+            row : {
+              'id' : {
+                  'property' : 'type',
+                  'object' : null
+              },
+              'File' : {
+                  'property' : 'filename',
+                  'object' : null
+              },
+              'Owner' : {
+                  'property' : 'uid',
+                  'object' : null
+              },
+              'Type' : {
+                  'property' : 'type',
+                  'object' : null
+              },
+              'Size' : {
+                  'property' : 'size',
+                  'object' : null
+              },
+              'Last edited' : {
+                  'property' : 'atime',
+                  'object' : null
+              },
+            },
+            results : results
+        } only
+    %}
+
     </div>
 </div>
 {% endblock %}
